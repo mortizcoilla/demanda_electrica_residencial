@@ -1,0 +1,32 @@
+# Dependencias
+node_modules/
+.npm
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Builds
+dist/
+build/
+.cache/
+
+# Entorno
+.env
+.env.local
+
+# Temporal
+*.tmp
+*.bak
+
+# ===== VISTA INTERNA LOCAL (no commitear, no deployar) =====
+# Este archivo contiene secciones internas (§8/9/10) que NO
+# deben quedar en el repo público. Mantenerlo solo en local.
+dashboard-internal.html

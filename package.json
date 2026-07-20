@@ -1,0 +1,21 @@
+{
+  "name": "dashboard-demanda-residencial-chile",
+  "version": "1.0.0",
+  "description": "Dashboard D3.js del estudio Predicción de demanda eléctrica residencial en Chile (julio 2026)",
+  "private": true,
+  "scripts": {
+    "start": "npx http-server -p 8000 -c-1",
+    "serve": "npx http-server -p 8000 -c-1",
+    "dev": "npx live-server --port=8000"
+  },
+  "keywords": [
+    "d3",
+    "dashboard",
+    "chile",
+    "demanda-electrica",
+    "residencial",
+    "forecasting"
+  ],
+  "author": "Estudio integrado demanda residencial Chile",
+  "license": "MIT"
+}

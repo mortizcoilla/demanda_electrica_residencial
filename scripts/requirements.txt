@@ -1,0 +1,6 @@
+# Dependencias del script de actualización de datos.
+# Solo se usan en scripts/update_dashboard_data.py; el dashboard en sí
+# no tiene dependencias de Python.
+
+requests>=2.28
+beautifulsoup4>=4.12
