@@ -1,0 +1,19 @@
+feat: capa de datos en JSON con provenance + docs iniciales
+
+OLA 1 — Atlas level: cimientos y trazabilidad.
+
+- 7 archivos data/*.json con metadata completa (fuente_primaria, url_fuente,
+  fecha_extraccion, cobertura_temporal, cobertura_geografica, nota_metodologica)
+  para composicion_sen, distribuidoras, peak_demanda_sen, vectores_cambio,
+  benchmarks_mape, predictores, kpis_hero.
+- js/data.js reescrito como loader async (loadAllData con fetch Promise.all).
+- 6 charts refactorizados para recibir DATA como parametro en lugar de importar
+  arrays. js/main.js orquesta loadAllData() antes de inicializar charts, con
+  banner sticky de error si fetch falla (tipico: file:// sin servidor).
+- docs/auditoria_inicial.md, changelog.md, metodologia.md, plan_actualizacion.md
+  con cadencia por fuente, procedimiento de release, calendario 2026-2027.
+- 2 .bak files eliminados (data.js.bak-*).
+- Sin console.log de debug (auditado).
+
+Dashboard conserva todos los charts, filtros y comportamiento. Solo cambia
+la fuente de datos: ahora vive en JSONs trazables, no en data.js.

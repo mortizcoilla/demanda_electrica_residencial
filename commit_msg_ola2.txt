@@ -1,0 +1,26 @@
+feat: visibilidad publica — OG, JSON-LD, endnotes, portafolio, print
+
+OLA 2 — Atlas level: compartir en LinkedIn/X, imprimir bien, ver portafolio.
+
+- favicon.svg con rayo verde sobre fondo crema (256 B).
+- index.html: head ampliado con meta description, author, robots, theme-color,
+  canonical, Open Graph (article + image 1200x630), Twitter Card, Article meta,
+  JSON-LD Article con author/publisher/citation CEN/CNE/Minenergia.
+- dashboard-internal.html: mismo head con robots noindex,nofollow y JSON-LD
+  reducido (sin citation).
+- index.html: endnotes publicas con 8 fuentes curadas (CEN, CNE, SEC, Minenergia,
+  CR2, ANAC, Empresas Electricas A.G., literatura). Footer unificado con el
+  internal: "Sobre este dashboard" + autor con 3 botones.
+- dashboard-internal.html: promesa rota de "bajar el estudio en MD (~230 KB)"
+  reemplazada por nota honesta: el dashboard ES el estudio. Footer igual al
+  publico.
+- Callout "Mas del autor" con link a mortizcoilla.vercel.app — discreto,
+  fondo tinta, patron JetBrains Mono uppercase con SVG icon externo. Mismo
+  patron que Atlas_Mercado_Electrico.
+- Print stylesheet: oculta nav, drawer, filtros, back-to-top, tooltip,
+  internal-watermark. Tipografia y enlaces en alto contraste.
+- Estilos nuevos en css/styles.css: .endnotes-grid (auto-fit minmax 260px),
+  .endnote con badge .en-label tipo paper, .portafolio-callout con .pc-link
+  estilo boton oscuro.
+- Sin cambios en el comportamiento de los charts (validado con refactor previo).
+- Sin console.log de debug.

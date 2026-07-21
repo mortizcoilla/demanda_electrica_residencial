@@ -1,37 +1,37 @@
-/* ===========================================================
-   Dashboard — Demanda Residencial Chile
-   Hoja de estilos principal — Sistema de diseño refinado
+﻿/* ===========================================================
+   Dashboard â€” Demanda Residencial Chile
+   Hoja de estilos principal â€” Sistema de diseÃ±o refinado
    =========================================================== */
 
 /* ===========================================================
    1. DESIGN TOKENS
    =========================================================== */
 :root {
-  /* Surface — papel cálido y sofisticado */
+  /* Surface â€” papel cÃ¡lido y sofisticado */
   --bg:           #faf9f6;
   --bg-tint:      #f5f2ec;
   --surface:      #ffffff;
   --surface-2:    #f7f5f0;
 
-  /* Hairlines — separaciones apenas perceptibles */
+  /* Hairlines â€” separaciones apenas perceptibles */
   --line:         #e6e2d8;
   --line-soft:    #efece4;
   --line-strong:  #d4d0c4;
 
-  /* Ink — texto con jerarquía real */
+  /* Ink â€” texto con jerarquÃ­a real */
   --ink:          #0c0f17;
   --ink-2:        #2c3340;
   --ink-3:        #5b6373;
   --ink-4:        #8b909c;
   --ink-5:        #b8bcc4;
 
-  /* Brand — verde profundo y terroso */
+  /* Brand â€” verde profundo y terroso */
   --primary:      #0a5847;
   --primary-2:    #0e7a62;
   --primary-soft: #e6f0eb;
   --primary-tint: #f2f8f5;
 
-  /* Accent — terracota apagado */
+  /* Accent â€” terracota apagado */
   --accent:       #b0663f;
   --accent-2:     #c47852;
   --accent-soft:  #f4e8db;
@@ -47,7 +47,7 @@
   --slate:        #475569;
   --slate-2:      #94a3b8;
 
-  /* Elevation — sombras verdaderamente sutiles */
+  /* Elevation â€” sombras verdaderamente sutiles */
   --shadow-xs: 0 1px 1px rgba(12, 15, 23, 0.03);
   --shadow-sm: 0 1px 2px rgba(12, 15, 23, 0.04), 0 1px 3px rgba(12, 15, 23, 0.03);
   --shadow-md: 0 2px 4px rgba(12, 15, 23, 0.04), 0 4px 12px rgba(12, 15, 23, 0.05);
@@ -199,7 +199,7 @@ b, strong { color: var(--ink); font-weight: 600; }
 .col-8 { grid-column: span 8; }
 
 /* ===========================================================
-   5. NAVIGATION — minimalista con drawer móvil
+   5. NAVIGATION â€” minimalista con drawer mÃ³vil
    =========================================================== */
 nav.top {
   position: sticky;
@@ -494,7 +494,7 @@ body.nav-open { overflow: hidden; }
 .byline-link:hover svg { opacity: 1; }
 
 /* ===========================================================
-   7. KPI STRIP — más refinado, menos infografía
+   7. KPI STRIP â€” mÃ¡s refinado, menos infografÃ­a
    =========================================================== */
 .kpi-strip {
   margin-top: clamp(40px, 5vw, 56px);
@@ -829,7 +829,7 @@ body.nav-open { overflow: hidden; }
 }
 
 /* ===========================================================
-   13. ROADMAP — phases
+   13. ROADMAP â€” phases
    =========================================================== */
 .phase {
   background: var(--surface);
@@ -911,7 +911,7 @@ body.nav-open { overflow: hidden; }
 }
 
 /* ===========================================================
-   14. TABLES — desktop, mobile-card
+   14. TABLES â€” desktop, mobile-card
    =========================================================== */
 .chart-block { overflow-x: auto; }
 .chart-block > .chart-svg { overflow: visible; }
@@ -1197,7 +1197,7 @@ footer .author {
 }
 
 /* ===========================================================
-   22. RESPONSIVE — TABLET (≤1024px)
+   22. RESPONSIVE â€” TABLET (â‰¤1024px)
    =========================================================== */
 @media (max-width: 1024px) {
   .wrap { padding: 0 clamp(16px, 3.5vw, 24px); }
@@ -1233,7 +1233,7 @@ footer .author {
 }
 
 /* ===========================================================
-   23. RESPONSIVE — MOBILE (≤768px)
+   23. RESPONSIVE â€” MOBILE (â‰¤768px)
    =========================================================== */
 @media (max-width: 768px) {
   body { font-size: 15px; }
@@ -1263,11 +1263,11 @@ footer .author {
   }
   .hero .meta svg { width: 13px; height: 13px; }
 
-  /* Byline más sutil */
+  /* Byline mÃ¡s sutil */
   .byline { font-size: 0.78rem; margin-top: 20px; }
   .byline::before { width: 20px; }
 
-  /* KPI strip: 2x2 más compacto */
+  /* KPI strip: 2x2 mÃ¡s compacto */
   .kpi-strip {
     margin-top: 32px;
     grid-template-columns: repeat(2, 1fr);
@@ -1279,7 +1279,7 @@ footer .author {
   .kpi .unit { font-size: 0.85rem; }
   .kpi .subnote { font-size: 0.7rem; margin-top: 6px; }
 
-  /* Sections: menos padding, headings más chicos */
+  /* Sections: menos padding, headings mÃ¡s chicos */
   .section { padding: 56px 0; }
   h2 { font-size: 1.45rem; letter-spacing: -0.018em; }
   h3 { font-size: 1rem; }
@@ -1327,7 +1327,7 @@ footer .author {
     text-align: left;
   }
 
-  /* Cards más compactas */
+  /* Cards mÃ¡s compactas */
   .card { padding: 18px; border-radius: 12px; }
   .card h3 { font-size: 0.98rem; }
   .card p { font-size: 0.9rem; }
@@ -1340,7 +1340,7 @@ footer .author {
   .stat-mini .l { font-size: 0.65rem; }
   .stat-mini .s { font-size: 0.7rem; }
 
-  /* Tablas principales → CARD LAYOUT en móvil (sin scroll horizontal) */
+  /* Tablas principales â†’ CARD LAYOUT en mÃ³vil (sin scroll horizontal) */
   .chart-block > table.data thead { display: none; }
   .chart-block > table.data tbody { display: block; }
   .chart-block > table.data tr {
@@ -1374,11 +1374,11 @@ footer .author {
     flex-shrink: 0;
   }
   .chart-block > table.data td.num { text-align: right; }
-  /* Tablas pequeñas dentro de cards mantienen layout tabla */
+  /* Tablas pequeÃ±as dentro de cards mantienen layout tabla */
   .card > table.data { font-size: 0.84rem; }
   .card > table.data th, .card > table.data td { padding: 8px 10px; }
 
-  /* Phases más compactas */
+  /* Phases mÃ¡s compactas */
   .phase { padding: 20px 18px; }
   .phase .phead { margin-bottom: 12px; padding-bottom: 14px; }
   .phase .phead .pn { width: 36px; height: 36px; font-size: 0.9rem; }
@@ -1415,7 +1415,7 @@ footer .author {
   /* Internal banner */
   .internal-banner { font-size: 0.75rem; padding: 9px 16px; }
 
-  /* Back to top más pequeño */
+  /* Back to top mÃ¡s pequeÃ±o */
   .back-to-top {
     bottom: 18px; right: 18px;
     width: 40px; height: 40px;
@@ -1428,7 +1428,7 @@ footer .author {
 }
 
 /* ===========================================================
-   24. MOBILE PEQUEÑO (≤420px)
+   24. MOBILE PEQUEÃ‘O (â‰¤420px)
    =========================================================== */
 @media (max-width: 420px) {
   body { font-size: 14.5px; }
@@ -1441,7 +1441,7 @@ footer .author {
   h2 { font-size: 1.3rem; }
   h3 { font-size: 0.95rem; }
 
-  /* Nav: brand más compacto */
+  /* Nav: brand mÃ¡s compacto */
   nav.top .inner { gap: 8px; }
   nav.top .brand { font-size: 0.8rem; max-width: calc(100vw - 76px); }
 
@@ -1458,18 +1458,18 @@ footer .author {
   .ctrl-btn { font-size: 0.72rem; padding: 4px 8px; }
   .ctrl-check { font-size: 0.72rem; padding: 4px 7px; }
 
-  /* Tabla card layout más compacto */
+  /* Tabla card layout mÃ¡s compacto */
   .chart-block > table.data tr { padding: 12px 14px; }
   .chart-block > table.data td { font-size: 0.84rem; }
   .chart-block > table.data td::before { font-size: 0.66rem; }
 
-  /* Byline + hero meta más compactos */
+  /* Byline + hero meta mÃ¡s compactos */
   .byline { flex-wrap: wrap; gap: 8px; }
   .byline::before { display: none; }
 }
 
 /* ===========================================================
-   24a. MÓVIL MUY ESTRECHO (≤360px) — iPhone SE 1ª gen, etc.
+   24a. MÃ“VIL MUY ESTRECHO (â‰¤360px) â€” iPhone SE 1Âª gen, etc.
    =========================================================== */
 @media (max-width: 360px) {
   body { font-size: 14px; }
@@ -1516,7 +1516,7 @@ footer .author {
 }
 
 /* ===========================================================
-   24b. MÓVIL ULTRA-ESTRECHO (≤340px) — Galaxy Fold cover, etc.
+   24b. MÃ“VIL ULTRA-ESTRECHO (â‰¤340px) â€” Galaxy Fold cover, etc.
    =========================================================== */
 @media (max-width: 340px) {
   body { font-size: 13.5px; }
@@ -1528,7 +1528,7 @@ footer .author {
 }
 
 /* ===========================================================
-   24b. TABLET GRANDE (769–1024px) — ajustes finos
+   24b. TABLET GRANDE (769â€“1024px) â€” ajustes finos
    =========================================================== */
 @media (min-width: 769px) and (max-width: 1024px) {
   /* Permitir wrap en nav links si la pantalla se acerca a 769 */
@@ -1564,4 +1564,131 @@ footer .author {
     border: 1px solid #ddd;
   }
   .hero::before { display: none; }
+}
+
+@media print {
+  .nav.top,
+  .nav-drawer,
+  .nav-drawer-backdrop,
+  .back-to-top,
+  .tooltip,
+  .chart-controls,
+  .internal-watermark,
+  .internal-banner {
+    display: none !important;
+  }
+
+  body { background: #fff !important; color: #000 !important; }
+  .section { padding: 24px 0 !important; border-top: 1px solid #000 !important; page-break-inside: avoid; }
+  .chart-block { page-break-inside: avoid; }
+  .card { box-shadow: none !important; border: 1px solid #ccc !important; }
+  a { color: #000 !important; text-decoration: underline !important; }
+  h1, h2, h3, h4 { color: #000 !important; }
+  .portafolio-callout { border-top: 1px solid #000; padding-top: 12px; }
+}
+
+/* ===========================================================
+   Endnotes — lista curada de fuentes
+   =========================================================== */
+.endnotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.endnote {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.endnote .en-label {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  margin-bottom: 4px;
+  padding: 2px 6px;
+  background: var(--primary-soft);
+  border-radius: 3px;
+}
+.endnote .en-org {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.endnote ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+.endnote ul li {
+  padding: 3px 0;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  border-top: 1px solid var(--line-soft);
+}
+.endnote ul li:first-child { border-top: 0; }
+.endnote ul li a {
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--line-strong);
+}
+.endnote ul li a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+.endnote .en-role {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-style: italic;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+}
+
+/* ===========================================================
+   Portafolio callout — discreto, mismo patrón que el byline
+   =========================================================== */
+.portafolio-callout {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.portafolio-callout .pc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+.portafolio-callout .pc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: background 180ms var(--ease);
+}
+.portafolio-callout .pc-link:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.portafolio-callout .pc-link .pc-icon {
+  flex-shrink: 0;
 }
