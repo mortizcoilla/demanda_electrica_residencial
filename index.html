@@ -21,11 +21,11 @@
 <!-- ============================== NAV ============================== -->
 <nav class="top">
   <div class="wrap inner">
-    <div class="brand">
-      <span class="dot"></span>
-      <span>Demanda Residencial Chile <span class="muted" style="font-weight:400">·</span> <span class="muted" style="font-weight:400">Dashboard 2026</span></span>
-    </div>
-    <div class="links">
+    <a href="#top" class="brand" aria-label="Demanda Residencial Chile — Inicio">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Demanda Residencial Chile <span class="muted-mid" style="font-weight:400">·</span> <span class="muted" style="font-weight:400">Dashboard 2026</span></span>
+    </a>
+    <div class="links" role="navigation" aria-label="Navegación principal">
       <a href="#contexto">Mercado</a>
       <a href="#demanda">Demanda</a>
       <a href="#vectores">Vectores</a>
@@ -34,8 +34,31 @@
       <a href="#implementacion">Implementación</a>
       <a href="#causal">Causal</a>
     </div>
+    <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navDrawer">
+      <svg class="icon-menu" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
 </nav>
+
+<div class="nav-drawer-backdrop" id="navDrawerBackdrop" tabindex="-1" aria-hidden="true"></div>
+<aside class="nav-drawer" id="navDrawer" aria-label="Menú de navegación" aria-hidden="true">
+  <div class="nav-drawer-head">
+    <span class="label">Navegación</span>
+    <button class="nav-drawer-close" type="button" aria-label="Cerrar menú">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <ul class="nav-list">
+    <li><a href="#contexto"><span>Mercado</span><span class="num">01</span></a></li>
+    <li><a href="#demanda"><span>Demanda</span><span class="num">02</span></a></li>
+    <li><a href="#vectores"><span>Vectores</span><span class="num">03</span></a></li>
+    <li><a href="#datos"><span>Datos</span><span class="num">04</span></a></li>
+    <li><a href="#modelos"><span>Modelos</span><span class="num">05</span></a></li>
+    <li><a href="#implementacion"><span>Implementación</span><span class="num">06</span></a></li>
+    <li><a href="#causal"><span>Causal</span><span class="num">07</span></a></li>
+  </ul>
+</aside>
 
 <!-- ============================== HERO ============================== -->
 <header class="hero">
@@ -305,18 +328,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Demanda real SEN</td><td>Horaria</td><td>2010 – presente</td><td>CEN · API SIP</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Facturación clientes regulados</td><td>Mensual / comunal</td><td>2015 – presente</td><td>CNE · Energía Abierta</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Temperatura y precipitación grillada</td><td>Diaria, 0.05°</td><td>1960 – 2021+</td><td>CR2 (CR2MET v2.5)</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Estaciones meteorológicas</td><td>Horaria</td><td>Red nacional</td><td>DMC, AGROCLIMA</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Variables macroeconómicas (IPC, IMACEC)</td><td>Mensual</td><td>Serie larga</td><td>INE, Banco Central</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Demografía (CENSO 2017 + proyecc.)</td><td>Comunal</td><td>2017 + 2024</td><td>INE</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Generación distribuida (Net Billing)</td><td>Mensual</td><td>2015 – presente</td><td>CNE · Reporte ERNC</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Calidad de servicio (SAIDI/SAIFI)</td><td>Mensual, comunal</td><td>2012 – presente</td><td>SEC</td><td><span class="pill ok">Abierta</span></td><td class="num">✓</td></tr>
-          <tr><td>Demanda residencial horaria anonimizada</td><td>Horaria, cliente/subest.</td><td>Solo piloto ISCI 2020-22</td><td>Enel / ISCI / tesis</td><td><span class="pill partial">Convenio</span></td><td class="num">—</td></tr>
-          <tr><td>Perfiles de carga BT1 por comuna</td><td>Horaria, mensual</td><td>Parcial en ITD CNE</td><td>CNE / Distribuidoras</td><td><span class="pill partial">Convenio</span></td><td class="num">—</td></tr>
-          <tr><td>Penetración EV por comuna</td><td>Anual / comunal</td><td>Agregado</td><td>ANAC / MINTRT</td><td><span class="pill partial">Convenio</span></td><td class="num">—</td></tr>
-          <tr><td>Datos smart meter por cliente BT1</td><td>15 min – horaria</td><td>1% parque Enel RM, creciendo</td><td>Enel Distribución</td><td><span class="pill no">Cerrada</span></td><td class="num">—</td></tr>
+          <tr><td data-label="Dato">Demanda real SEN</td><td data-label="Granularidad">Horaria</td><td data-label="Cobertura">2010 – presente</td><td data-label="Fuente">CEN · API SIP</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Facturación clientes regulados</td><td data-label="Granularidad">Mensual / comunal</td><td data-label="Cobertura">2015 – presente</td><td data-label="Fuente">CNE · Energía Abierta</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Temperatura y precipitación grillada</td><td data-label="Granularidad">Diaria, 0.05°</td><td data-label="Cobertura">1960 – 2021+</td><td data-label="Fuente">CR2 (CR2MET v2.5)</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Estaciones meteorológicas</td><td data-label="Granularidad">Horaria</td><td data-label="Cobertura">Red nacional</td><td data-label="Fuente">DMC, AGROCLIMA</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Variables macroeconómicas (IPC, IMACEC)</td><td data-label="Granularidad">Mensual</td><td data-label="Cobertura">Serie larga</td><td data-label="Fuente">INE, Banco Central</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Demografía (CENSO 2017 + proyecc.)</td><td data-label="Granularidad">Comunal</td><td data-label="Cobertura">2017 + 2024</td><td data-label="Fuente">INE</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Generación distribuida (Net Billing)</td><td data-label="Granularidad">Mensual</td><td data-label="Cobertura">2015 – presente</td><td data-label="Fuente">CNE · Reporte ERNC</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Calidad de servicio (SAIDI/SAIFI)</td><td data-label="Granularidad">Mensual, comunal</td><td data-label="Cobertura">2012 – presente</td><td data-label="Fuente">SEC</td><td data-label="Estado"><span class="pill ok">Abierta</span></td><td data-label="Disponible" class="num">✓</td></tr>
+          <tr><td data-label="Dato">Demanda residencial horaria anonimizada</td><td data-label="Granularidad">Horaria, cliente/subest.</td><td data-label="Cobertura">Solo piloto ISCI 2020-22</td><td data-label="Fuente">Enel / ISCI / tesis</td><td data-label="Estado"><span class="pill partial">Convenio</span></td><td data-label="Disponible" class="num">—</td></tr>
+          <tr><td data-label="Dato">Perfiles de carga BT1 por comuna</td><td data-label="Granularidad">Horaria, mensual</td><td data-label="Cobertura">Parcial en ITD CNE</td><td data-label="Fuente">CNE / Distribuidoras</td><td data-label="Estado"><span class="pill partial">Convenio</span></td><td data-label="Disponible" class="num">—</td></tr>
+          <tr><td data-label="Dato">Penetración EV por comuna</td><td data-label="Granularidad">Anual / comunal</td><td data-label="Cobertura">Agregado</td><td data-label="Fuente">ANAC / MINTRT</td><td data-label="Estado"><span class="pill partial">Convenio</span></td><td data-label="Disponible" class="num">—</td></tr>
+          <tr><td data-label="Dato">Datos smart meter por cliente BT1</td><td data-label="Granularidad">15 min – horaria</td><td data-label="Cobertura">1% parque Enel RM, creciendo</td><td data-label="Fuente">Enel Distribución</td><td data-label="Estado"><span class="pill no">Cerrada</span></td><td data-label="Disponible" class="num">—</td></tr>
         </tbody>
       </table>
     </div>
@@ -428,14 +451,14 @@
               <tr><th>Actor</th><th>Tipo</th><th>Enfoque</th></tr>
             </thead>
             <tbody>
-              <tr><td><b>U. de Chile</b> (ISCI)</td><td><span class="pill ok">Académico</span></td><td>COVID analytics, NILM, demand response</td></tr>
-              <tr><td><b>USM</b></td><td><span class="pill ok">Académico</span></td><td>Smart grid, optimización, microrredes</td></tr>
-              <tr><td><b>USACH / UNAB</b></td><td><span class="pill ok">Académico</span></td><td>ML aplicado, series de tiempo, anomalías</td></tr>
-              <tr><td><b>U. de Talca</b></td><td><span class="pill ok">Académico</span></td><td>Eficiencia energética residencial, AC</td></tr>
-              <tr><td><b>Suncast</b></td><td><span class="pill partial">Comercial</span></td><td>Forecast solar/eólico &gt; 3,000 MW en Chile</td></tr>
-              <tr><td><b>Inodú</b></td><td><span class="pill partial">Comercial</span></td><td>Analítica energética, sector público</td></tr>
-              <tr><td><b>Metric Tree</b></td><td><span class="pill partial">Comercial</span></td><td>Data analytics regulatorio</td></tr>
-              <tr><td><b>Enel / CGE / Chilquinta / Saesa</b></td><td><span class="pill no">Operador</span></td><td>Forecast interno, publica poco</td></tr>
+              <tr><td data-label="Actor"><b>U. de Chile</b> (ISCI)</td><td data-label="Tipo"><span class="pill ok">Académico</span></td><td data-label="Enfoque">COVID analytics, NILM, demand response</td></tr>
+              <tr><td data-label="Actor"><b>USM</b></td><td data-label="Tipo"><span class="pill ok">Académico</span></td><td data-label="Enfoque">Smart grid, optimización, microrredes</td></tr>
+              <tr><td data-label="Actor"><b>USACH / UNAB</b></td><td data-label="Tipo"><span class="pill ok">Académico</span></td><td data-label="Enfoque">ML aplicado, series de tiempo, anomalías</td></tr>
+              <tr><td data-label="Actor"><b>U. de Talca</b></td><td data-label="Tipo"><span class="pill ok">Académico</span></td><td data-label="Enfoque">Eficiencia energética residencial, AC</td></tr>
+              <tr><td data-label="Actor"><b>Suncast</b></td><td data-label="Tipo"><span class="pill partial">Comercial</span></td><td data-label="Enfoque">Forecast solar/eólico &gt; 3,000 MW en Chile</td></tr>
+              <tr><td data-label="Actor"><b>Inodú</b></td><td data-label="Tipo"><span class="pill partial">Comercial</span></td><td data-label="Enfoque">Analítica energética, sector público</td></tr>
+              <tr><td data-label="Actor"><b>Metric Tree</b></td><td data-label="Tipo"><span class="pill partial">Comercial</span></td><td data-label="Enfoque">Data analytics regulatorio</td></tr>
+              <tr><td data-label="Actor"><b>Enel / CGE / Chilquinta / Saesa</b></td><td data-label="Tipo"><span class="pill no">Operador</span></td><td data-label="Enfoque">Forecast interno, publica poco</td></tr>
             </tbody>
           </table>
         </div>
@@ -507,14 +530,35 @@
         <p style="margin-top: 8px">
           Literatura revisada por pares: IEEE, Elsevier, MDPI Entropy, Scielo, arXiv (2024-2026).
         </p>
+        <p class="copy">© 2026 Miguel Ortiz C. — Estudio técnico sobre demanda eléctrica residencial en Chile.</p>
       </div>
       <div>
+        <h4>Autor</h4>
+        <p class="author">Miguel Ortiz C.</p>
+        <div class="social-links" style="margin-top: 16px">
+          <a class="social-link" href="https://linkedin.com/in/mortizcoilla" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn
+          </a>
+          <a class="social-link" href="mailto:mortizcoilla@gmail.com" aria-label="Email">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email
+          </a>
+          <a class="social-link" href="https://wa.me/56933293943" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </footer>
 
 <div class="tooltip" id="tooltip"></div>
+
+<button class="back-to-top" type="button" aria-label="Volver arriba">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5,12 12,5 19,12"/></svg>
+</button>
 
 <!-- ============================== APP ENTRY POINT ============================== -->
 <script type="module" src="js/main.js"></script>
