@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "titulo": "Composición de la demanda SEN 2024",
+    "descripcion": "Retiros de energía del Sistema Eléctrico Nacional por tipo de cliente, año 2024",
+    "unidad": "% de retiros",
+    "fuente_primaria": "CEN — Coordinador Eléctrico Nacional",
+    "documento_fuente": "Reporte anual art. 72-15, año 2024",
+    "url_fuente": "https://www.coordinador.cl/reporte-anual/",
+    "fecha_extraccion": "2026-07-15",
+    "cobertura_temporal": "2024",
+    "cobertura_geografica": "SEN (Sistema Eléctrico Nacional, Chile continental)",
+    "nota_metodologica": "Porcentajes sobre el total de retiros de energía del SEN. 'Otros / autogeneración neta' agrupa autogeneración, ventas a empresas distribuidoras para sus pérdidas y consumos propios no desglosados."
+  },
+  "datos": [
+    { "label": "Residencial regulado",            "value": 30, "color": "#0a5847", "descripcion": "≈ 6.3 M hogares, ~30% de los retiros" },
+    { "label": "Comercial / pequeño industrial", "value": 24, "color": "#475569", "descripcion": "Comercios,PyMEs reguladas" },
+    { "label": "Industrial y minero libre",      "value": 42, "color": "#b0663f", "descripcion": "Clientes libres, gran minería e industria" },
+    { "label": "Otros / autogeneración neta",    "value":  4, "color": "#d4d0c4", "descripcion": "Autogeneración y consumos propios" }
+  ]
+}

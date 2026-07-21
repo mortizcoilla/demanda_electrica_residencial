@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "titulo": "Benchmarks de MAPE reportados en literatura revisada por pares",
+    "descripcion": "Síntesis de 11 estudios de forecasting de demanda eléctrica publicados entre 2009 y 2026, con foco LATAM. Cada estudio incluye país, horizonte, método, MAPE publicado y referencia bibliográfica.",
+    "unidad": "MAPE (%)",
+    "fuente_primaria": "Síntesis propia a partir de literatura revisada por pares",
+    "documento_fuente": "Revisión sistemática PRISMA + arXiv + IEEE Xplore + Elsevier + Scielo (2009–2026)",
+    "url_fuente": "https://scholar.google.com / https://arxiv.org / https://scielo.org",
+    "fecha_extraccion": "2026-07-08",
+    "cobertura_temporal": "2009–2026",
+    "cobertura_geografica": "Global (con foco LATAM)",
+    "nota_metodologica": "MAPE se reporta tal como aparece en el paper original. No se normaliza por horizonte ni por nivel de agregación. Estudios LATAM (Chile, Argentina, Colombia, Uruguay) se destacan como referencia local; el resto sirve como benchmark global. La familia 'ensemble' incluye híbridos de clásicos + ML o stacking de modelos.",
+    "familia_leyenda": {
+      "classical": "Clásico / estadístico",
+      "ml":        "Machine learning supervisado",
+      "deep":      "Deep learning",
+      "ensemble":  "Ensemble / híbrido"
+    },
+    "familia_color": {
+      "classical": "#b0663f",
+      "ml":        "#4048b8",
+      "deep":      "#0a5847",
+      "ensemble":  "#b88a1c"
+    }
+  },
+  "datos": [
+    { "study": "Revisión sistemática Chile (137 estudios)", "method": "ARIMA / SARIMA",      "mape": 3.21, "horiz": "mixto",     "type": "classical", "latam": true,  "ref": "Vivas et al. 2020" },
+    { "study": "Prophet vs LSTM — Colombia (Quindío)",      "method": "Prophet",             "mape": 4.10, "horiz": "24 h",      "type": "classical", "latam": true,  "ref": "Vargas-Forero et al. 2024" },
+    { "study": "Prophet vs LSTM — Colombia (Quindío)",      "method": "LSTM",                "mape": 4.90, "horiz": "24 h",      "type": "deep",      "latam": true,  "ref": "Vargas-Forero et al. 2024" },
+    { "study": "LSTM clima + calendario — Argentina (CBA)", "method": "LSTM",                "mape": 3.20, "horiz": "horario",   "type": "deep",      "latam": true,  "ref": "arXiv 2509.19374, 2024" },
+    { "study": "N-BEATS horario — Rumania (proxy)",         "method": "N-BEATS",             "mape": 2.32, "horiz": "horario",   "type": "deep",      "latam": false, "ref": "Romanian J. Econ. 2025" },
+    { "study": "SARIMA horario — Rumania (proxy)",          "method": "SARIMA",              "mape": 3.63, "horiz": "horario",   "type": "classical", "latam": false, "ref": "Romanian J. Econ. 2025" },
+    { "study": "ExtraTrees ensamble — Uruguay",             "method": "ExtraTrees ensemble", "mape": 5.17, "horiz": "day-ahead", "type": "ensemble",  "latam": true,  "ref": "Porteiro et al. 2022" },
+    { "study": "ExtraTrees ensamble — Uruguay",             "method": "ExtraTrees (subest.)","mape": 9.09, "horiz": "day-ahead", "type": "ensemble",  "latam": true,  "ref": "Porteiro et al. 2022" },
+    { "study": "LSTM con ventana 2h — Melbourne",           "method": "LSTM (R² 0.878)",     "mape": 6.20, "horiz": "horario",   "type": "deep",      "latam": false, "ref": "arXiv 2604.12304, 2026" },
+    { "study": "XGBoost + calendar — California",           "method": "XGBoost",             "mape": 2.80, "horiz": "24 h",      "type": "ml",        "latam": false, "ref": "IEEE 2023" },
+    { "study": "LightGBM + lags — España",                  "method": "LightGBM",            "mape": 3.50, "horiz": "horario",   "type": "ml",        "latam": false, "ref": "Applied Energy 2022" }
+  ]
+}

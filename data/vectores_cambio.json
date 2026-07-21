@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "titulo": "Evolución de los tres vectores de cambio en demanda residencial 2018–2025",
+    "descripcion": "Penetración AC residencial, instalaciones Net Billing, y ventas de vehículos eléctricos (BEV) anuales.",
+    "unidad": "mixta (ver cada serie)",
+    "fuentes": [
+      {
+        "serie": "AC residencial (% hogares)",
+        "fuente_primaria": "Ministerio de Energía",
+        "documento_fuente": "Encuesta de uso residencial y caracterización del parque de artefactos",
+        "url_fuente": "https://energia.gob.cl/estudios/encuesta-residencial",
+        "fecha_extraccion": "2026-06-20"
+      },
+      {
+        "serie": "Net Billing (instalaciones)",
+        "fuente_primaria": "CNE — Comisión Nacional de Energía",
+        "documento_fuente": "Reporte ERNC y Generación Distribuida, Ley 21.118",
+        "url_fuente": "https://energiaabierta.cl/cne/reporte-ernc",
+        "fecha_extraccion": "2026-06-22"
+      },
+      {
+        "serie": "BEV vendidos al año (unidades)",
+        "fuente_primaria": "ANAC — Asociación Nacional Automotriz de Chile",
+        "documento_fuente": "Anuario ANAC, ventas vehículos livianos y medianos",
+        "url_fuente": "https://www.anac.cl/ventas/",
+        "fecha_extraccion": "2026-06-25"
+      }
+    ],
+    "cobertura_temporal": "2018–2026 (proyección)",
+    "cobertura_geografica": "Chile",
+    "nota_metodologica": "Tres series con unidades heterogéneas. AC en % de hogares; Net Billing en miles de instalaciones acumuladas; BEV en unidades anuales vendidas (no acumuladas). El eje Y izquierdo se usa para AC% y Net Billing; eje Y derecho para BEV."
+  },
+  "years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+  "series": {
+    "ac_pct": {
+      "label": "AC residencial",
+      "unidad": "% hogares",
+      "color": "#0a5847",
+      "values": [3.1, 3.6, 4.0, 4.5, 5.5, 6.8, 8.5, 10.0, 11.5],
+      "fuente_idx": 0
+    },
+    "net_billing": {
+      "label": "Net Billing",
+      "unidad": "instalaciones (miles, acumulado)",
+      "color": "#b0663f",
+      "values": [1.5, 3, 5, 9, 14, 20, 28, 35, 39.6],
+      "fuente_idx": 1
+    },
+    "bev_sold": {
+      "label": "Vehículos eléctricos",
+      "unidad": "unidades vendidas (año)",
+      "color": "#4048b8",
+      "values": [50, 100, 200, 500, 1100, 1500, 4507, 5200, 6500],
+      "fuente_idx": 2
+    }
+  }
+}

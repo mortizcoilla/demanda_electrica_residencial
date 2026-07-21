@@ -4,12 +4,11 @@
 // ===========================================================
 
 import { C, fmt, showTip, hideTip, watchResize, chartWidth, isCompact, isTablet } from '../utils.js';
-import { PEAK_DEMAND_DATA } from '../data.js';
 
-export function initDemandChart() {
+export function initDemandChart(DATA) {
   const svg = d3.select('#chart-demand');
   const container = svg.node().parentElement;
-  const peaks = PEAK_DEMAND_DATA;
+  const peaks = DATA.peak.datos;
 
   function computeLayout() {
     const W = chartWidth(container, 880);

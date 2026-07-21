@@ -5,12 +5,15 @@
 // ===========================================================
 
 import { C, fmt, showTip, hideTip, watchResize, chartWidth, isCompact, isTablet } from '../utils.js';
-import { DRIVERS_YEARS, AC_PCT, NET_BILLING, BEV_SOLD } from '../data.js';
 
-export function initDriversChart() {
+export function initDriversChart(DATA) {
   const svg = d3.select('#chart-drivers');
   const container = svg.node().parentElement;
-  const years = DRIVERS_YEARS;
+  const V = DATA.vectores;
+  const years = V.years;
+  const AC_PCT      = V.series.ac_pct.values;
+  const NET_BILLING = V.series.net_billing.values;
+  const BEV_SOLD    = V.series.bev_sold.values;
 
   const visible = { ac: true, nb: true, bev: true };
 

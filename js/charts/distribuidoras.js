@@ -4,12 +4,11 @@
 // ===========================================================
 
 import { C, fmt, showTip, hideTip, watchResize, chartWidth, isCompact, isTablet } from '../utils.js';
-import { DISTRIBUIDORAS_DATA } from '../data.js';
 
-export function initDistribuidorasChart() {
+export function initDistribuidorasChart(DATA) {
   const svg = d3.select('#chart-distribuidoras');
   const container = svg.node().parentElement;
-  const data = DISTRIBUIDORAS_DATA;
+  const data = DATA.distribuidoras.datos;
   let activeZone = 'all';
 
   const baseFill = (i) => i === 1 ? C.primary

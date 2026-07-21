@@ -4,12 +4,14 @@
 // ===========================================================
 
 import { C, showTip, hideTip, watchResize, chartWidth, isCompact, isTablet } from '../utils.js';
-import { MAPE_DATA, MAPE_FAMILY_LABELS, MAPE_FAMILY_COLORS } from '../data.js';
 
-export function initMapeChart() {
+export function initMapeChart(DATA) {
   const svg = d3.select('#chart-mape');
   const container = svg.node().parentElement;
-  const data = MAPE_DATA;
+  const M = DATA.benchmarks;
+  const data = M.datos;
+  const MAPE_FAMILY_LABELS = M.metadata.familia_leyenda;
+  const MAPE_FAMILY_COLORS = M.metadata.familia_color;
 
   let activeRef = 'all';
   let activeFamily = 'all';

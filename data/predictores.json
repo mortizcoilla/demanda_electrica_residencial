@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "titulo": "Mapa de predictores por estabilidad y horizonte",
+    "descripcion": "Posiciona 15 predictores de demanda residencial en el plano estabilidad × horizonte. Permite distinguir qué predictores son estacionarios (clima, calendario) de los que están en transición (tecnología, regulación).",
+    "unidad": "posición relativa (0–1) en ejes estabilidad y horizonte",
+    "fuente_primaria": "Construcción propia a partir del estudio integrado",
+    "documento_fuente": "Tabla de predictores, sección §7 (cadena causal)",
+    "url_fuente": "https://github.com/mortizcoilla/demanda_electrica_residencial",
+    "fecha_extraccion": "2026-07-20",
+    "cobertura_temporal": "2026 (evaluación de estado actual)",
+    "cobertura_geografica": "Chile (residencial)",
+    "nota_metodologica": "Eje X (estabilidad): 0 = muy estable, 1 = muy cambiante. Eje Y (horizonte): 0 = corto plazo, 1 = largo plazo. Tipo agrupa el predictor en Físico (clima), Temporal (calendario), Tecnológico (penetración), Regulatorio (tarifas), Macro (economía), Geográfico (zona), Socioeconómico (renta), Conductual (elasticidad), Shock (eventos extraordinarios)."
+  },
+  "ejes": {
+    "x": { "label": "Estabilidad",      "min": 0, "max": 1, "ticks": [0, 0.5, 1] },
+    "y": { "label": "Horizonte (largo plazo)", "min": 0, "max": 1, "ticks": [0, 0.5, 1] }
+  },
+  "datos": [
+    { "name": "Temperatura / clima",         "x": 0.20, "y": 0.78, "color": "#0a5847", "type": "Físico",       "note": "Estable, alta señal" },
+    { "name": "Calendario (hora, día, mes)", "x": 0.18, "y": 0.85, "color": "#0a5847", "type": "Temporal",     "note": "Determinista" },
+    { "name": "Feriados y vacaciones",       "x": 0.30, "y": 0.65, "color": "#0a5847", "type": "Temporal",     "note": "Catálogo fijo" },
+    { "name": "Humedad / sensación térmica", "x": 0.25, "y": 0.55, "color": "#0a5847", "type": "Físico",       "note": "Aumenta sensibilidad" },
+    { "name": "Radiación solar",             "x": 0.35, "y": 0.40, "color": "#0a5847", "type": "Físico",       "note": "Modula FV" },
+    { "name": "Calidad de vivienda (CEV)",   "x": 0.65, "y": 0.20, "color": "#b0663f", "type": "Estructural",  "note": "Cambio lento" },
+    { "name": "Penetración FV por comuna",   "x": 0.62, "y": 0.32, "color": "#b0663f", "type": "Tecnológico",  "note": "Crece rápido" },
+    { "name": "Parque EV acumulado",         "x": 0.72, "y": 0.28, "color": "#b0663f", "type": "Tecnológico",  "note": "Tendencia fuerte" },
+    { "name": "Aire acondicionado",          "x": 0.55, "y": 0.38, "color": "#b0663f", "type": "Tecnológico",  "note": "Penetración creciente" },
+    { "name": "Tarifa (PEC/MPC/FET)",        "x": 0.70, "y": 0.55, "color": "#4048b8", "type": "Regulatorio",  "note": "Salta en escalones" },
+    { "name": "IPC / IMACEC",                "x": 0.55, "y": 0.70, "color": "#475569", "type": "Macro",        "note": "Estacional" },
+    { "name": "Macrozona térmica",           "x": 0.30, "y": 0.15, "color": "#0a5847", "type": "Geográfico",   "note": "Estructura fija" },
+    { "name": "Renta del hogar",             "x": 0.50, "y": 0.10, "color": "#b0663f", "type": "Socioecon.",   "note": "Lento, regional" },
+    { "name": "Elasticidad precio",          "x": 0.68, "y": 0.62, "color": "#4048b8", "type": "Conductual",   "note": "−0.05 a −0.38 cp" },
+    { "name": "Pandemia / crisis",           "x": 0.78, "y": 0.70, "color": "#9c4f48", "type": "Shock",        "note": "Corto plazo, alta señal" }
+  ]
+}

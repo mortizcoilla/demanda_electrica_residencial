@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "titulo": "Clientes regulados por distribuidora",
+    "descripcion": "Clientes regulados en zonas de concesión no superpuestas. Las 4 mayores concentran el 95% de los clientes.",
+    "unidad": "clientes",
+    "fuente_primaria": "Empresas Eléctricas A.G.",
+    "documento_fuente": "Anuario 2023 — Empresas Eléctricas A.G.",
+    "url_fuente": "https://www.electricas.cl/anuario",
+    "fecha_extraccion": "2026-07-10",
+    "cobertura_temporal": "2023",
+    "cobertura_geografica": "Chile continental (zonas de concesión SEN)",
+    "nota_metodologica": "Total de clientes con empalme regulado. 'Filiales' incluye empresas regionales absorbidas o adquiridas. 'Cooperativas' agrupa las distribuidoras COOPEL, COPELEC, SOCOEPA, COOPREL, CRELL y otras de menor tamaño. Las macrozonas (norte/centro/sur/austral) se asignan según las regiones servidas."
+  },
+  "macrozonas": {
+    "norte":  { "label": "Norte",  "regiones": ["Arica y Parinacota","Tarapacá","Antofagasta","Atacama","Coquimbo"] },
+    "centro": { "label": "Centro", "regiones": ["Valparaíso","Metropolitana de Santiago","O'Higgins"] },
+    "sur":    { "label": "Sur",    "regiones": ["Maule","Ñuble","Biobío"] },
+    "austral":{ "label": "Austral","regiones": ["La Araucanía","Los Ríos","Los Lagos","Aysén","Magallanes"] }
+  },
+  "datos": [
+    { "name": "CGE Distribución + filiales", "value": 3362294, "region": "XV, I, II, IV, V (sur RM), VI, VII, VIII, IX, XII", "zones": ["norte","centro","sur","austral"] },
+    { "name": "Enel Distribución Chile",     "value": 2162606, "region": "Región Metropolitana (33 comunas)",                "zones": ["centro"] },
+    { "name": "Grupo Saesa",                 "value": 1054635, "region": "VIII, XVI, IX, X, XI, XIV",                          "zones": ["sur","austral"] },
+    { "name": "Chilquinta + filiales",       "value":  831372, "region": "V, VII, VIII",                                       "zones": ["centro","sur"] },
+    { "name": "EEPA (Puente Alto)",          "value":   65009, "region": "Comuna de Puente Alto (RM)",                        "zones": ["centro"] },
+    { "name": "Otras + cooperativas",        "value":  102000, "region": "VII, VIII, X principalmente",                        "zones": ["sur"] }
+  ]
+}

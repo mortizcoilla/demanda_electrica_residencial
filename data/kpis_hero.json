@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "titulo": "KPIs del hero — Demanda residencial Chile",
+    "descripcion": "Cuatro indicadores clave que encabezan el dashboard.",
+    "fuente_primaria": "Ver cada KPI en su campo fuente",
+    "fecha_extraccion": "2026-07-15",
+    "cobertura_temporal": "2024–2043",
+    "cobertura_geografica": "Chile (SEN)"
+  },
+  "datos": [
+    {
+      "label": "Demanda residencial del SEN",
+      "value": "~30",
+      "unit": "%",
+      "subnote": "≈ 30 TWh sobre 85 TWh totales en 2024",
+      "variant": "default",
+      "fuente": "CEN · Reporte anual art. 72-15",
+      "url_fuente": "https://www.coordinador.cl/reporte-anual/"
+    },
+    {
+      "label": "Clientes regulados",
+      "value": "7.31",
+      "unit": "M",
+      "subnote": "de los cuales ≈ 90% son residenciales",
+      "variant": "alt",
+      "fuente": "CNE · Energía Abierta",
+      "url_fuente": "https://energiaabierta.cl/"
+    },
+    {
+      "label": "Peak SEN 2024",
+      "value": "12,190",
+      "unit": "MWh/h",
+      "subnote": "31 de enero a las 16 h, ola de calor",
+      "variant": "indigo",
+      "fuente": "CEN · Gráficos de operación real",
+      "url_fuente": "https://www.coordinador.cl/operacion/graficos/"
+    },
+    {
+      "label": "Proyección SEN 2043",
+      "value": "134.5",
+      "unit": "TWh",
+      "subnote": "CAGR 2.82% — CNE, 2023-2043",
+      "variant": "amber",
+      "fuente": "CNE · Plan Nacional de Energía 2023-2043",
+      "url_fuente": "https://energia.gob.cl/planificacion/"
+    }
+  ]
+}

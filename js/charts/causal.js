@@ -4,12 +4,11 @@
 // ===========================================================
 
 import { C, showTip, hideTip, watchResize, chartWidth, isCompact, isTablet } from '../utils.js';
-import { PREDICTOR_DATA } from '../data.js';
 
-export function initCausalChart() {
+export function initCausalChart(DATA) {
   const svg = d3.select('#chart-causal');
   const container = svg.node().parentElement;
-  const data = PREDICTOR_DATA;
+  const data = DATA.predictores.datos;
 
   function computeLayout() {
     const W = chartWidth(container, 980);

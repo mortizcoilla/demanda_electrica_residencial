@@ -4,11 +4,11 @@
 // ===========================================================
 
 import { C, showTip, hideTip, watchResize, chartWidth, isCompact } from '../utils.js';
-import { SECTOR_DATA } from '../data.js';
 
-export function initSectorChart() {
+export function initSectorChart(DATA) {
   const svg = d3.select('#chart-sector');
   const container = svg.node().parentElement;
+  const SECTOR_DATA = DATA.composicion.datos;
   let cleanup = null;
 
   function render() {
