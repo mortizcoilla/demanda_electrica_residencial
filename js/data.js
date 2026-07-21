@@ -16,7 +16,9 @@ const DATA_FILES = {
   vectores:       'data/vectores_cambio.json',
   benchmarks:     'data/benchmarks_mape.json',
   predictores:    'data/predictores.json',
-  kpis:           'data/kpis_hero.json'
+  kpis:           'data/kpis_hero.json',
+  proyeccion_cne: 'data/proyeccion_cne.json',
+  peak_shift:     'data/peak_shift.json'
 };
 
 /**

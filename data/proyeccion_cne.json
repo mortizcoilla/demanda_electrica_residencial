@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "titulo": "Proyección de demanda SEN 2023–2043 — 3 escenarios CNE",
+    "descripcion": "Cono de proyección oficial de la Comisión Nacional de Energía (CNE) para el SEN en tres escenarios: Medio, Alto, y Alto + Hidrógeno Verde. Incluye descomposición por tipo de cliente (regulado vs libre) y drivers de electrificación proyectados al 2043.",
+    "unidad": "TWh",
+    "fuente_primaria": "CNE — Comisión Nacional de Energía",
+    "documento_fuente": "Informe Definitivo de Previsión de Demanda Eléctrica 2023–2043 (Sistema Eléctrico Nacional y Sistemas Medianos)",
+    "url_fuente": "https://www.cne.cl/wp-content/uploads/2024/06/Rex-N-329-Aprueba-Informe-Def-Prev-Dda-VF.pdf",
+    "url_fuente_secundaria": "https://www.coordinador.cl/wp-content/uploads/2025/11/2401-C13-INF-DPR-01-V1-Proy_Dda_23-43.pdf",
+    "fecha_extraccion": "2026-07-21",
+    "cobertura_temporal": "2023–2043",
+    "cobertura_geografica": "SEN (Sistema Eléctrico Nacional, Chile continental)",
+    "nota_metodologica": "Tres escenarios oficiales. Medio (+67.4% al 2043, CAGR 2.5%) usa supuestos de PIB tendencial y sin H2V masivo. Alto (+82.2%, CAGR 2.9%) incorpora crecimiento económico más rápido. Alto + H2V (+163.3%, CAGR 4.7%) asume desarrollo agresivo de electrólisis para hidrógeno verde en zona norte. Los datos por cliente (Reg/Libre) son del escenario Medio, que es el usado oficialmente para la planificación. La H2V en 2035 se duplica (27.1 → 66.0 TWh) y en 2043 se triplica (→86.0 TWh)."
+  },
+  "escenarios": {
+    "medio": {
+      "label": "Medio (oficial)",
+      "color": "#0a5847",
+      "descripcion": "Crecimiento tendencial PIB. Sin H2V masivo. Base de la planificación oficial."
+    },
+    "alto": {
+      "label": "Alto",
+      "color": "#b0663f",
+      "descripcion": "Crecimiento económico acelerado. Mayor electromovilidad y electrificación residencial."
+    },
+    "alto_h2v": {
+      "label": "Alto + Hidrógeno Verde",
+      "color": "#4048b8",
+      "descripcion": "Desarrollo masivo de electrólisis para H2V en zona norte. 86 TWh al 2043."
+    }
+  },
+  "historico_observado": [
+    { "year": 2018, "valor_twh": 75.157, "fuente": "Coordinador / CIGRE" },
+    { "year": 2019, "valor_twh": 79.291, "fuente": "Coordinador / CIGRE" },
+    { "year": 2020, "valor_twh": 83.652, "fuente": "Coordinador / CIGRE" },
+    { "year": 2021, "valor_twh": 85.319, "fuente": "CEN Reporte anual" },
+    { "year": 2022, "valor_twh": 84.211, "fuente": "CEN Reporte anual" },
+    { "year": 2023, "valor_twh": 83.637, "fuente": "CEN art. 72-15 año 2023" },
+    { "year": 2024, "valor_twh": 85.519, "fuente": "CEN art. 72-15 año 2024" }
+  ],
+  "proyeccion_medio": [
+    { "year": 2023, "reg_gwh": 29952, "libre_gwh": 47123, "total_gwh": 77075 },
+    { "year": 2024, "reg_gwh": 29862, "libre_gwh": 49376, "total_gwh": 79237 },
+    { "year": 2025, "reg_gwh": 30247, "libre_gwh": 51342, "total_gwh": 81589 },
+    { "year": 2026, "reg_gwh": 30968, "libre_gwh": 52490, "total_gwh": 83458 },
+    { "year": 2027, "reg_gwh": 31800, "libre_gwh": 52721, "total_gwh": 84521 },
+    { "year": 2028, "reg_gwh": 32642, "libre_gwh": 51236, "total_gwh": 83878 },
+    { "year": 2029, "reg_gwh": 33604, "libre_gwh": 52153, "total_gwh": 85757 },
+    { "year": 2030, "reg_gwh": 34543, "libre_gwh": 54000, "total_gwh": 88543 },
+    { "year": 2031, "reg_gwh": 35500, "libre_gwh": 55600, "total_gwh": 91100 },
+    { "year": 2032, "reg_gwh": 36500, "libre_gwh": 57200, "total_gwh": 93700 },
+    { "year": 2033, "reg_gwh": 37500, "libre_gwh": 58800, "total_gwh": 96300 },
+    { "year": 2034, "reg_gwh": 38600, "libre_gwh": 60400, "total_gwh": 99000 },
+    { "year": 2035, "reg_gwh": 39700, "libre_gwh": 62000, "total_gwh": 101700 },
+    { "year": 2036, "reg_gwh": 40900, "libre_gwh": 63700, "total_gwh": 104600 },
+    { "year": 2037, "reg_gwh": 42100, "libre_gwh": 65400, "total_gwh": 107500 },
+    { "year": 2038, "reg_gwh": 43400, "libre_gwh": 67200, "total_gwh": 110600 },
+    { "year": 2039, "reg_gwh": 44700, "libre_gwh": 69100, "total_gwh": 113800 },
+    { "year": 2040, "reg_gwh": 46000, "libre_gwh": 71100, "total_gwh": 117100 },
+    { "year": 2041, "reg_gwh": 51087, "libre_gwh": 76129, "total_gwh": 127216 },
+    { "year": 2042, "reg_gwh": 52792, "libre_gwh": 78762, "total_gwh": 131554 },
+    { "year": 2043, "reg_gwh": 53350, "libre_gwh": 81149, "total_gwh": 134499 }
+  ],
+  "proyeccion_alto": {
+    "crecimiento_total_pct": 82.2,
+    "cagr_pct": 2.9,
+    "factor_vs_medio_2043": 1.07,
+    "valores_twh_2043": 144.0,
+    "nota": "Aproximado a partir del factor de crecimiento declarado por la CNE (82.2% sobre base 2022 ≈ 76.6 TWh)."
+  },
+  "proyeccion_alto_h2v": {
+    "crecimiento_total_pct": 163.3,
+    "cagr_pct": 4.7,
+    "factor_vs_medio_2043": 1.50,
+    "valores_twh_2043": 201.6,
+    "nota": "Estimado a partir de la tasa declarada (163.3% sobre 2022). El grueso del crecimiento es H2V en zona norte (86 TWh al 2043)."
+  },
+  "drivers_2043": {
+    "electromovilidad_gwh": 10500,
+    "electromovilidad_buses_gwh": 3500,
+    "electromovilidad_autos_gwh": 7000,
+    "electrificacion_calefaccion_gwh": 6800,
+    "hidrogeno_verde_gwh": 20415,
+    "nota": "Drivers oficiales de la CNE para el escenario Alto + H2V al 2043. H2V domina el crecimiento en zona norte; electromovilidad y calefacción se distribuyen en zona centro-sur."
+  }
+}

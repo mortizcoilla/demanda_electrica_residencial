@@ -9,6 +9,8 @@ import { initDemandChart }         from './charts/demand.js';
 import { initDriversChart }        from './charts/drivers.js';
 import { initMapeChart }           from './charts/mape.js';
 import { initCausalChart }         from './charts/causal.js';
+import { initPeakShiftChart }      from './charts/peak_shift.js';
+import { initProyeccionCneChart }  from './charts/proyeccion_cne.js';
 import { initNavigation }          from './controls.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
       initDriversChart(DATA);
       initMapeChart(DATA);
       initCausalChart(DATA);
+      initPeakShiftChart(DATA);
+      initProyeccionCneChart(DATA);
 
       // controls (no requiere data)
       initNavigation();
