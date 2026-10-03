@@ -21,7 +21,8 @@ export const C = {
   ink3:        '#6b7280',
   ink4:        '#9ca3af',
   line:        '#e7e7e3',
-  lineSoft:    '#f0eeea'
+  lineSoft:    '#f0eeea',
+  lineStrong:  '#c9c7c0'
 };
 
 /** Tooltip global compartido por todos los charts. */

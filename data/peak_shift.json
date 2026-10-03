@@ -7,33 +7,92 @@
     "documento_fuente": "Reportes energéticos mensuales + Reporte anual art. 72-15",
     "url_fuente": "https://www.coordinador.cl/reportes-y-estadisticas/",
     "url_fuente_secundaria": "https://www.coordinador.cl/wp-content/uploads/2025/04/CEN-Reporte-Art-72-15-ano-2024.pdf",
-    "fecha_extraccion": "2026-07-21",
+    "fecha_extraccion": "2026-10-02",
     "cobertura_temporal": "2018–2025",
     "cobertura_geografica": "SEN (Sistema Eléctrico Nacional)",
-    "nota_metodologica": "El peak del SEN agregado (no residencial) ha cambiado su estacionalidad dominante. Entre 2018-2021 los peaks eran invernales (junio-agosto) por calefacción industrial + iluminación. Desde 2022 los peaks son estivales (enero-febrero) por olas de calor y AC residencial masificado. El peak del 26-dic-2023 es una excepción invernal en el año de transición. El peak 2025 del 04-feb a las 15h fue confirmado por el Reporte Energético SEN de marzo 2025."
+    "nota_metodologica": "El peak del SEN agregado (no residencial) ha cambiado su estacionalidad dominante. Entre 2018-2021 los peaks eran invernales (julio-agosto) por calefacción industrial + iluminación. Desde fines de 2022 los peaks ocurren en el período estival (dic-feb): 15-dic-2022 y 26-dic-2023 son estivales tempranos en años de transición, y 2024-2025 peaks plenamente estivales (31-ene y 04-feb) por olas de calor y AC residencial masificado. Valores 2022 y 2023 verificados contra el Reporte anual art. 72-15. El peak 2025 del 04-feb a las 15h fue confirmado por el Reporte Energético SEN de marzo 2025."
   },
   "peaks": [
-    { "year": 2018, "val": 10700, "mes": 7,  "fecha": "11-jul-2018", "estacion": "invierno", "evento": "Peak invernal histórico. Peak 2010-2019 ocurre en jun-ago." },
-    { "year": 2019, "val": 10920, "mes": 8,  "fecha": "ago-2019",    "estacion": "invierno", "evento": "Peak 2019. Patrón invernal se mantiene." },
-    { "year": 2020, "val": 10500, "mes": 12, "fecha": "dic-2020",    "estacion": "transicion", "evento": "COVID: peak más bajo de la década. Lockdown reduce demanda industrial/comercial." },
-    { "year": 2021, "val": 11100, "mes": 8,  "fecha": "ago-2021",    "estacion": "invierno", "evento": "Recuperación post-COVID. Vuelve a patrón invernal." },
-    { "year": 2022, "val": 11500, "mes": 1,  "fecha": "ene-2022",    "estacion": "verano",   "evento": "Peak se mueve al verano por primera vez. Ola de calor + AC." },
-    { "year": 2023, "val": 11549, "mes": 12, "fecha": "26-dic-2023", "estacion": "transicion", "evento": "Peak histórico invernal. Año de transición: peak 12 12-dic a las 16h." },
-    { "year": 2024, "val": 12190, "mes": 1,  "fecha": "31-ene-2024", "estacion": "verano",   "evento": "Ola de calor en zona central. Peak 35.8°C. AC sextuplicó gasto desde 2018." },
-    { "year": 2025, "val": 12397, "mes": 2,  "fecha": "04-feb-2025", "estacion": "verano",   "evento": "Ola de calor febrero 2025. Peak 12.397,5 MWh/h a las 15h. +1,7% vs 2024." }
+    {
+      "year": 2018,
+      "val": 10700,
+      "mes": 7,
+      "fecha": "11-jul-2018",
+      "estacion": "invierno",
+      "evento": "Peak invernal histórico. Peak 2010-2019 ocurre en jun-ago."
+    },
+    {
+      "year": 2019,
+      "val": 10920,
+      "mes": 8,
+      "fecha": "ago-2019",
+      "estacion": "invierno",
+      "evento": "Peak 2019. Patrón invernal se mantiene."
+    },
+    {
+      "year": 2020,
+      "val": 10500,
+      "mes": 12,
+      "fecha": "dic-2020",
+      "estacion": "transicion",
+      "evento": "COVID: peak más bajo de la década. Lockdown reduce demanda industrial/comercial."
+    },
+    {
+      "year": 2021,
+      "val": 11100,
+      "mes": 8,
+      "fecha": "ago-2021",
+      "estacion": "invierno",
+      "evento": "Recuperación post-COVID. Vuelve a patrón invernal."
+    },
+    {
+      "year": 2022,
+      "val": 11590,
+      "mes": 12,
+      "fecha": "15-dic-2022",
+      "estacion": "transicion",
+      "evento": "Peak se sale del patrón invernal: ocurre en diciembre (estival temprano). Ola de calor + AC."
+    },
+    {
+      "year": 2023,
+      "val": 11549,
+      "mes": 12,
+      "fecha": "26-dic-2023",
+      "estacion": "transicion",
+      "evento": "Año de transición: peak estival temprano (26-dic a las 16h), -0,4% vs 2022."
+    },
+    {
+      "year": 2024,
+      "val": 12190,
+      "mes": 1,
+      "fecha": "31-ene-2024",
+      "estacion": "verano",
+      "evento": "Ola de calor en zona central. Peak 35.8°C. AC sextuplicó gasto desde 2018."
+    },
+    {
+      "year": 2025,
+      "val": 12397,
+      "mes": 2,
+      "fecha": "04-feb-2025",
+      "estacion": "verano",
+      "evento": "Ola de calor febrero 2025. Peak 12.397,5 MWh/h a las 15h. +1,7% vs 2024."
+    }
   ],
   "proyeccion_2026": {
     "valor_estimado": 12600,
     "fuente": "Estimación basada en CAGR 2018-2025",
-    "rango": [12500, 13200],
+    "rango": [
+      12500,
+      13200
+    ],
     "nota": "Estimación propia: extrapolación lineal del CAGR 2,1% observado en peaks anuales 2018-2025. Asume ola de calor moderada en zona central."
   },
   "estadisticas_shift": {
-    "promedio_2018_2021_mes": 7.5,
-    "promedio_2022_2025_mes": 1.5,
+    "promedio_2018_2021_mes": 8,
+    "promedio_2022_2025_mes": 1,
     "shift_meses": -6.0,
     "cambio_peak_mwh": 1697,
-    "cambio_peak_pct": 15.85,
-    "nota": "Entre 2018-2021 y 2022-2025, el peak del SEN se ha desplazado 6 meses antes en el calendario (de mitad de año a principio de año) y ha subido ≈16% en magnitud."
+    "cambio_peak_pct": 15.9,
+    "nota": "Mes típico del peak 2018-2021: julio-agosto (invierno). 2024-2025: enero-febrero (verano). Los peaks dic-2022/dic-2023 (estival temprano) marcan la transición. Considerando la estacionalidad circular, el peak se desplazó ≈6 meses en el calendario (de mitad de año a principio de año) y subió +15,9% en magnitud (10.700 → 12.397 MWh/h)."
   }
 }

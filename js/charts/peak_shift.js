@@ -49,8 +49,11 @@ export function initPeakShiftChart(DATA) {
 
     // Eje X: años 2018-2026 (incluyendo proyección)
     const x = d3.scaleLinear().domain([2018, 2026]).range([0, innerW]);
-    // Eje Y: MWh/h 10000-13000
-    const y = d3.scaleLinear().domain([10000, 13000]).range([innerH, 0]);
+    // Eje Y: dominio calculado desde los datos + rango de la proyección 2026
+    const allVals = [...data.map(d => d.val), proj2026.rango[1], proj2026.valor_estimado];
+    const yMin = Math.min(10000, Math.floor((d3.min(allVals) - 400) / 200) * 200);
+    const yMax = Math.max(13000, Math.ceil((d3.max(allVals) + 150) / 200) * 200);
+    const y = d3.scaleLinear().domain([yMin, yMax]).range([innerH, 0]);
 
     // Grid
     g.append('g').selectAll('line')
@@ -68,8 +71,25 @@ export function initPeakShiftChart(DATA) {
     // === Línea punteada 2026 (proyección) ===
     g.append('line')
       .attr('x1', x(2025)).attr('x2', x(2026))
-      .attr('y1', y(12397)).attr('y2', y(proj2026.valor_estimado))
+      .attr('y1', y(data[data.length - 1].val)).attr('y2', y(proj2026.valor_estimado))
       .attr('stroke', C.ink3).attr('stroke-width', 1.5).attr('stroke-dasharray', '4,4').attr('opacity', 0.7);
+
+    // === Banda de rango 2026 (incertidumbre de la proyección) ===
+    g.append('rect')
+      .attr('x', x(2026) - 6)
+      .attr('y', y(proj2026.rango[1]))
+      .attr('width', 12)
+      .attr('height', Math.max(0, y(proj2026.rango[0]) - y(proj2026.rango[1])))
+      .attr('fill', C.ink3).attr('opacity', 0.16).attr('rx', 3)
+      .style('cursor', 'pointer')
+      .on('mouseenter', (evt) => showTip(evt,
+        `<strong>Proyección 2026</strong><br>Estimado: ${fmt(proj2026.valor_estimado)} MWh/h<br>Rango: ${fmt(proj2026.rango[0])} – ${fmt(proj2026.rango[1])}<br><span style="color:#a8a8a4">${proj2026.nota}</span>`))
+      .on('mousemove', evt => {
+        d3.select('#tooltip')
+          .style('left', (evt.clientX + 12) + 'px')
+          .style('top', (evt.clientY - 12) + 'px');
+      })
+      .on('mouseleave', hideTip);
 
     // === Dots de cada peak ===
     g.selectAll('circle.peak').data(data).enter().append('circle')
@@ -121,6 +141,39 @@ export function initPeakShiftChart(DATA) {
       .attr('text-anchor', 'middle')
       .attr('font-size', fsFoot).attr('fill', C.ink4)
       .text('lockdown ↓');
+
+    // === Crosshair + readout en vivo (snap al año más cercano) ===
+    const focusG = g.append('g').style('pointer-events', 'none').style('opacity', 0);
+    const fxLine = focusG.append('line')
+      .attr('y1', 0).attr('y2', innerH)
+      .attr('stroke', C.ink4).attr('stroke-width', 1).attr('stroke-dasharray', '3,3');
+    const fxDot = focusG.append('circle')
+      .attr('r', 5.5).attr('fill', 'none').attr('stroke', C.ink).attr('stroke-width', 1.5);
+
+    const readout = svg.append('g')
+      .attr('transform', `translate(${margin.left + 2}, 16)`)
+      .style('pointer-events', 'none').style('opacity', 0);
+    const rText = readout.append('text')
+      .attr('font-size', compact ? 10 : 11.5).attr('font-weight', 600).attr('fill', C.ink2);
+
+    g
+      .on('mousemove', (evt) => {
+        const [mx] = d3.pointer(evt, g.node());
+        const clampedX = Math.max(0, Math.min(innerW, mx));
+        let idx = Math.round(x.invert(clampedX)) - 2018;
+        idx = Math.max(0, Math.min(data.length - 1, idx));
+        const d = data[idx];
+        const px = x(d.year), py = y(d.val);
+        fxLine.attr('x1', px).attr('x2', px);
+        fxDot.attr('cx', px).attr('cy', py);
+        rText.text(`${d.fecha} · ${fmt(d.val)} MWh/h · ${d.estacion}`);
+        focusG.style('opacity', 1);
+        readout.style('opacity', 1);
+      })
+      .on('mouseleave', () => {
+        focusG.style('opacity', 0);
+        readout.style('opacity', 0);
+      });
 
     // === Eje X ===
     g.append('g').attr('transform', `translate(0, ${innerH})`)

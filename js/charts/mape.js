@@ -15,6 +15,34 @@ export function initMapeChart(DATA) {
 
   let activeRef = 'all';
   let activeFamily = 'all';
+  let activeSort = 'desc';
+
+  // --- Toggle de ordenamiento (Mayor/Menor MAPE), inyectado junto a los filtros ---
+  if (!document.getElementById('mapeSortFilter')) {
+    const countEl = document.getElementById('mapeCount');
+    if (countEl) {
+      const lbl = document.createElement('span');
+      lbl.className = 'ctrl-label';
+      lbl.style.marginLeft = '12px';
+      lbl.textContent = 'Orden:';
+      const grp = document.createElement('div');
+      grp.className = 'ctrl-group';
+      grp.id = 'mapeSortFilter';
+      grp.innerHTML =
+        '<button class="ctrl-btn active" data-sort="desc">Mayor MAPE</button>' +
+        '<button class="ctrl-btn" data-sort="asc">Menor MAPE</button>';
+      countEl.parentElement.insertBefore(lbl, countEl);
+      countEl.parentElement.insertBefore(grp, countEl);
+      grp.querySelectorAll('.ctrl-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          grp.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeSort = btn.getAttribute('data-sort');
+          render();
+        });
+      });
+    }
+  }
 
   function computeLayout() {
     const W = chartWidth(container, 980);
@@ -48,7 +76,7 @@ export function initMapeChart(DATA) {
         const famOk = activeFamily === 'all' || d.type === activeFamily;
         return refOk && famOk;
       })
-      .sort((a, b) => b.mape - a.mape);   // mayor a menor MAPE
+      .sort((a, b) => activeSort === 'desc' ? b.mape - a.mape : a.mape - b.mape);
 
     // dynamic height based on filtered count + legend wrap
     const itemH = compact ? 32 : 38;

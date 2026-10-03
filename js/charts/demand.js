@@ -1,9 +1,19 @@
 // ===========================================================
 // charts/demand.js — Demanda máxima horaria del SEN 2018-2025
 // Responsivo: re-renderiza al cambiar el ancho del contenedor.
+// Colores por estación unificados con peak_shift.js
+// (invierno verde · verano terracota · transición ocre).
 // ===========================================================
 
 import { C, fmt, showTip, hideTip, watchResize, chartWidth, isCompact, isTablet } from '../utils.js';
+
+const SEASON_COLOR = {
+  invierno:   '#0a5847',
+  verano:     '#b0663f',
+  transicion: '#b88a1c'
+};
+
+const seasonKey = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
 export function initDemandChart(DATA) {
   const svg = d3.select('#chart-demand');
@@ -31,12 +41,18 @@ export function initDemandChart(DATA) {
 
     const g = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
     const x = d3.scaleBand().domain(peaks.map(d => d.y)).range([0, innerW]).padding(0.25);
-    const y = d3.scaleLinear().domain([10000, 12800]).range([innerH, 0]);
+
+    // Dominio Y calculado desde los datos (con piso en 10.000 para no exagerar el delta)
+    const vals = peaks.map(d => d.val);
+    const yMin = Math.min(10000, Math.floor((d3.min(vals) - 400) / 200) * 200);
+    const yMax = Math.max(12800, Math.ceil((d3.max(vals) + 300) / 200) * 200);
+    const y = d3.scaleLinear().domain([yMin, yMax]).range([innerH, 0]);
 
     const fsAxis   = compact ? 10 : 11;
     const fsVal    = compact ? 10 : 12;
     const fsSeason = compact ? 9  : 10;
     const fsFoot   = compact ? 10 : 11;
+    const fsLegend = compact ? 9  : 10;
     const labelOff = compact ? 16 : 22;
     const seasonOff= compact ? 6  : 8;
 
@@ -54,7 +70,7 @@ export function initDemandChart(DATA) {
       .attr('y', innerH)
       .attr('width', x.bandwidth())
       .attr('height', 0).attr('rx', 4)
-      .attr('fill', d => d.season === 'Verano' ? C.accent : C.primary2)
+      .attr('fill', d => SEASON_COLOR[seasonKey(d.season)] || C.primary2)
       .attr('opacity', 0.9)
       .transition().duration(700).delay((d, i) => i * 40)
       .attr('y', d => y(d.val))
@@ -76,11 +92,25 @@ export function initDemandChart(DATA) {
       .attr('font-size', fsSeason).attr('fill', C.ink4)
       .text(d => d.season);
 
-    // highlight 2024 — accent mark on top of the peak bar
-    const peak2024 = peaks[6];
+    // mini-leyenda de estación (arriba a la derecha, dentro del margen superior)
+    const seasons = [...new Set(peaks.map(d => d.season))];
+    let lx = innerW;
+    const lg = g.append('g').attr('transform', `translate(0, ${-margin.top + 14})`);
+    seasons.slice().reverse().forEach(s => {
+      const key = seasonKey(s);
+      lg.append('circle').attr('cx', lx - 4).attr('cy', -3).attr('r', 4).attr('fill', SEASON_COLOR[key] || C.primary2);
+      const t = lg.append('text').attr('x', lx - 12).attr('y', 0)
+        .attr('text-anchor', 'end')
+        .attr('font-size', fsLegend).attr('fill', C.ink3)
+        .text(s);
+      lx -= 12 + s.length * (fsLegend * 0.62) + 18;
+    });
+
+    // highlight del peak récord — marca superior sobre la barra del máximo
+    const peakRecord = peaks.reduce((a, b) => (b.val > a.val ? b : a));
     g.append('rect')
-      .attr('x', x(peak2024.y))
-      .attr('y', y(peak2024.val) - 4)
+      .attr('x', x(peakRecord.y))
+      .attr('y', y(peakRecord.val) - 4)
       .attr('width', x.bandwidth())
       .attr('height', 4)
       .attr('fill', C.ink)
@@ -99,13 +129,16 @@ export function initDemandChart(DATA) {
       .call(g => g.selectAll('line').attr('stroke', 'transparent'))
       .call(g => g.selectAll('text').attr('fill', C.ink4).attr('font-size', fsAxis));
 
-    // footer annotation (no collision with bars)
+    // footer annotation — calculado desde los datos
+    const first = peaks[0], last = peaks[peaks.length - 1];
+    const growth = ((last.val / first.val - 1) * 100).toFixed(1).replace('.', ',');
+    const recordYear = peakRecord.y;
     g.append('text')
       .attr('x', 0).attr('y', innerH + 32).attr('text-anchor', 'start')
       .attr('font-size', fsFoot).attr('fill', C.ink3)
       .text(compact
-        ? '+16% en 7 años · peak 12.190 MWh/h el 31-ene-2024'
-        : '+16% en 7 años (10.700 → 12.400 MWh/h) · peak histórico: 12.190 MWh/h el 31-ene-2024');
+        ? `+${growth}% en ${last.y - first.y} años · peak ${fmt(peakRecord.val)} MWh/h (${recordYear})`
+        : `+${growth}% en ${last.y - first.y} años (${fmt(first.val)} → ${fmt(last.val)} MWh/h) · peak récord: ${fmt(peakRecord.val)} MWh/h en ${recordYear}`);
 
     // hover
     g.selectAll('rect.bar')

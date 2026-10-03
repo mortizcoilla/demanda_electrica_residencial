@@ -1119,7 +1119,9 @@ footer .author {
    19. TOOLTIP
    =========================================================== */
 .tooltip {
-  position: absolute;
+  /* fixed: showTip posiciona con coordenadas de viewport (clientX/Y);
+     con absolute el tooltip se descuadraba al hacer scroll */
+  position: fixed;
   pointer-events: none;
   z-index: 100;
   background: var(--ink);
@@ -1869,6 +1871,12 @@ footer {
 .sector-clean .sc-item:hover {
   border-color: var(--ink-3);
   background: var(--surface);
+}
+.sector-clean .sc-item-dim {
+  opacity: 0.42;
+}
+.sector-clean .sc-item-dim:hover {
+  opacity: 1;
 }
 .sector-clean .sc-swatch {
   width: 14px; height: 14px;

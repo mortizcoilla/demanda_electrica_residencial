@@ -1,24 +1,24 @@
 {
   "metadata": {
     "titulo": "Demanda máxima horaria del SEN 2018–2025",
-    "descripcion": "Peak horario anual del SEN y estacionalidad en que ocurrió. Crecimiento ≈ 16% en 7 años. El peak se ha movido de invierno a verano desde 2022.",
+    "descripcion": "Peak horario anual del SEN y estacionalidad en que ocurrió. Crecimiento ≈ 16% en 7 años. Desde fines de 2022 el peak ocurre en el período estival (dic–feb), empujado por olas de calor y aire acondicionado.",
     "unidad": "MWh/h",
     "fuente_primaria": "CEN — Coordinador Eléctrico Nacional",
-    "documento_fuente": "Gráficos de operación real, demanda horaria",
+    "documento_fuente": "Reporte anual art. 72-15 + Reportes energéticos mensuales",
     "url_fuente": "https://www.coordinador.cl/operacion/graficos/",
-    "fecha_extraccion": "2026-07-12",
+    "fecha_extraccion": "2026-10-02",
     "cobertura_temporal": "2018–2025",
     "cobertura_geografica": "SEN (Chile continental)",
-    "nota_metodologica": "Peak horario del SEN agregado (no residencial). El peak real residencial se concentra entre 19–22 h. El valor 2025 es estimación basada en operación real a junio 2026 + proyección técnica CNE."
+    "nota_metodologica": "Peak horario del SEN agregado (no residencial). El peak real residencial se concentra entre 19–22 h. Valores 2022 y 2023 verificados contra el Reporte anual art. 72-15 (11.590,30 MWh/h el 15-dic-2022 y 11.549,10 MWh/h el 26-dic-2023). El peak 2025 (12.397,5 MWh/h, 04-feb a las 15h) fue confirmado por el Reporte Energético SEN de marzo 2025."
   },
   "datos": [
-    { "y": 2018, "val": 10700, "season": "Invierno", "note": "10.700 MWh/h" },
-    { "y": 2019, "val": 10920, "season": "Invierno", "note": "10.920 MWh/h" },
-    { "y": 2020, "val": 10500, "season": "Invierno", "note": "10.500 MWh/h (COVID)" },
-    { "y": 2021, "val": 11100, "season": "Invierno", "note": "11.100 MWh/h" },
-    { "y": 2022, "val": 11500, "season": "Verano",   "note": "11.500 MWh/h" },
-    { "y": 2023, "val": 11820, "season": "Verano",   "note": "11.820 MWh/h" },
-    { "y": 2024, "val": 12190, "season": "Verano",   "note": "12.190 MWh/h · 31-ene 16h" },
-    { "y": 2025, "val": 12400, "season": "Verano",   "note": "12.400 MWh/h (est.)" }
+    { "y": 2018, "val": 10700, "season": "Invierno",   "note": "10.700 MWh/h · 11-jul" },
+    { "y": 2019, "val": 10920, "season": "Invierno",   "note": "10.920 MWh/h · agosto" },
+    { "y": 2020, "val": 10500, "season": "Transición", "note": "10.500 MWh/h · dic-2020 (COVID)" },
+    { "y": 2021, "val": 11100, "season": "Invierno",   "note": "11.100 MWh/h · agosto" },
+    { "y": 2022, "val": 11590, "season": "Transición", "note": "11.590 MWh/h · 15-dic 16h" },
+    { "y": 2023, "val": 11549, "season": "Transición", "note": "11.549 MWh/h · 26-dic 16h" },
+    { "y": 2024, "val": 12190, "season": "Verano",     "note": "12.190 MWh/h · 31-ene 16h, ola de calor" },
+    { "y": 2025, "val": 12397, "season": "Verano",     "note": "12.397 MWh/h · 04-feb 15h (confirmado)" }
   ]
 }

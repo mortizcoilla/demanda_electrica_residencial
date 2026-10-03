@@ -1,5 +1,9 @@
 // ===========================================================
 // charts/causal.js — Mapa de predictores (estabilidad × horizonte)
+// Eje X = estabilidad (izq: estable · der: cambiante)
+// Eje Y = horizonte (abajo: corto plazo · arriba: largo plazo)
+// Leyenda de familias derivada de los colores del dataset,
+// clickeable para aislar una familia (click de nuevo = reset).
 // Responsivo: re-renderiza al cambiar el ancho del contenedor.
 // ===========================================================
 
@@ -10,18 +14,34 @@ export function initCausalChart(DATA) {
   const container = svg.node().parentElement;
   const data = DATA.predictores.datos;
 
+  // Familias por color — se derivan del dataset para que leyenda y
+  // burbujas siempre coincidan. El label resume los types agrupados.
+  const FAMILIES = [
+    { color: '#0a5847', label: 'Clima · calendario · zona' },
+    { color: '#b0663f', label: 'Tecnológico · estructural' },
+    { color: '#4048b8', label: 'Regulatorio · conductual' },
+    { color: '#475569', label: 'Macro' },
+    { color: '#9c4f48', label: 'Shocks' }
+  ].filter(f => data.some(d => d.color === f.color));
+
+  let selectedFamily = null;  // color de familia activa, o null
+
   function computeLayout() {
     const W = chartWidth(container, 980);
     const compact = isCompact(W);
     const tablet  = isTablet(W);
-    // En compact: el alto aumenta para que las burbujas no se monten.
-    const H = compact ? 560 : tablet ? 460 : 460;
-    const margin = { top: 30, right: 20, bottom: 40, left: 20 };
+    const H = compact ? 560 : 460;
+    const margin = {
+      top: 34,
+      right: 20,
+      bottom: compact ? 96 : 64,   // espacio para la leyenda horizontal
+      left: compact ? 40 : 46      // espacio para el label Y rotado
+    };
     return { W, H, margin, innerW: W - margin.left - margin.right, innerH: H - margin.top - margin.bottom, compact, tablet };
   }
 
   function render() {
-    const { W, H, margin, innerW, innerH, compact, tablet } = computeLayout();
+    const { W, H, margin, innerW, innerH, compact } = computeLayout();
 
     svg
       .attr('viewBox', `0 0 ${W} ${H}`)
@@ -30,13 +50,11 @@ export function initCausalChart(DATA) {
 
     const g = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-    const fsQuad   = compact ? 9  : 11;
-    const fsLabel  = compact ? 9  : 11;
-    const fsLegend = compact ? 10 : 11;
-    const fsAxisHint = compact ? 9 : 10;
+    const fsAxis  = compact ? 9 : 10;
+    const fsLabel = compact ? 9 : 11;
+    const fsLegend = compact ? 9.5 : 11;
     const baseR    = compact ? 9  : 12;
     const hoverR   = compact ? 13 : 18;
-    // Posiciones base
     const labelDy  = compact ? -12 : -16;
 
     // quadrant cross
@@ -45,35 +63,39 @@ export function initCausalChart(DATA) {
     g.append('line').attr('x1', 0).attr('x2', innerW).attr('y1', innerH / 2).attr('y2', innerH / 2)
       .attr('stroke', C.line).attr('stroke-width', 1);
 
-    // quadrant labels
-    const qStyle = { fontSize: fsQuad, fontWeight: 600, fill: C.ink4, letterSpacing: '0.08em' };
-    function setQStyle(el) {
-      el.attr('font-size', qStyle.fontSize)
-        .attr('font-weight', qStyle.fontWeight)
-        .attr('fill', qStyle.fill)
-        .attr('letter-spacing', qStyle.letterSpacing);
-      return el;
-    }
-    const pad = compact ? 8 : 10;
-    setQStyle(g.append('text').attr('x', pad).attr('y', 16 + fsQuad)).text('CORTO PLAZO');
-    setQStyle(g.append('text').attr('x', innerW - pad).attr('y', 16 + fsQuad).attr('text-anchor', 'end')).text('LARGO PLAZO');
-    setQStyle(g.append('text').attr('x', pad).attr('y', innerH - 8)).text('ESTACIONARIO');
-    setQStyle(g.append('text').attr('x', innerW - pad).attr('y', innerH - 8).attr('text-anchor', 'end')).text('DINÁMICO');
-
-    // x-axis hint
+    // === Etiquetas de ejes (semántica corregida según metadata del dataset) ===
+    // X: estabilidad (0 = estable · 1 = cambiante)
     g.append('text')
-      .attr('x', innerW / 2).attr('y', -10).attr('text-anchor', 'middle')
-      .attr('font-size', fsAxisHint).attr('fill', C.ink4)
-      .text(compact ? 'horizonte →' : 'horizonte del forecast →');
+      .attr('x', innerW / 2).attr('y', innerH + 26).attr('text-anchor', 'middle')
+      .attr('font-size', fsAxis).attr('fill', C.ink4).attr('letter-spacing', '0.1em')
+      .text('ESTABILIDAD:  ESTABLE → CAMBIANTE');
+    // Y: horizonte (0 = corto · 1 = largo), rotada
+    g.append('text')
+      .attr('transform', `rotate(-90)`)
+      .attr('x', -innerH / 2).attr('y', -10).attr('text-anchor', 'middle')
+      .attr('font-size', fsAxis).attr('fill', C.ink4).attr('letter-spacing', '0.1em')
+      .text('HORIZONTE:  CORTO → LARGO');
+    // hints de extremos del eje Y
+    g.append('text')
+      .attr('x', -2).attr('y', innerH + 12).attr('text-anchor', 'end')
+      .attr('font-size', fsAxis).attr('fill', C.ink4)
+      .text('corto');
+    g.append('text')
+      .attr('x', -2).attr('y', 10).attr('text-anchor', 'end')
+      .attr('font-size', fsAxis).attr('fill', C.ink4)
+      .text('largo');
 
-    // bubbles
-    g.selectAll('circle.node').data(data).enter().append('circle')
+    // === Burbujas ===
+    const isDim = d => selectedFamily !== null && d.color !== selectedFamily;
+
+    const bubbles = g.selectAll('circle.node').data(data).enter().append('circle')
       .attr('class', 'node')
       .attr('cx', d => d.x * innerW)
       .attr('cy', d => d.y * innerH)
       .attr('r', 0)
       .attr('fill', d => d.color)
-      .attr('opacity', 0.85)
+      .attr('opacity', d => isDim(d) ? 0.12 : 0.85)
+      .style('cursor', 'pointer')
       .transition().duration(600).delay((d, i) => i * 40)
       .attr('r', d => baseR + (d.name.length > 18 ? 3 : 0));
 
@@ -82,35 +104,93 @@ export function initCausalChart(DATA) {
       .attr('x', d => d.x * innerW)
       .attr('y', d => d.y * innerH + labelDy)
       .attr('text-anchor', 'middle')
-      .attr('font-size', fsLabel).attr('font-weight', 500).attr('fill', C.ink)
+      .attr('font-size', fsLabel).attr('font-weight', 500)
+      .attr('fill', d => isDim(d) ? C.line : C.ink)
       .text(d => d.name)
       .attr('opacity', 0)
       .transition().duration(600).delay((d, i) => 200 + i * 40)
       .attr('opacity', 1);
 
-    // type legend — esquina inferior derecha, adaptada al ancho
-    const lgW = compact ? 150 : 200;
-    const lgX = W - lgW - 8;
-    const lgY = H - (compact ? 90 : 110);
-    const lg = svg.append('g').attr('transform', `translate(${lgX}, ${lgY})`);
-    const types = [
-      { name: 'Físico / climático', color: C.primary },
-      { name: 'Tecnológico',        color: C.accent },
-      { name: 'Regulatorio',       color: C.indigo },
-      { name: 'Macro / shock',     color: C.rose }
-    ];
-    const rowH = compact ? 18 : 20;
-    const dotR = compact ? 4 : 5;
-    types.forEach((t, i) => {
-      const r = lg.append('g').attr('transform', `translate(0, ${i * rowH})`);
-      r.append('circle').attr('cx', 5).attr('cy', 0).attr('r', dotR).attr('fill', t.color);
-      r.append('text').attr('x', 15).attr('y', 4).attr('font-size', fsLegend).attr('fill', C.ink2).text(t.name);
-    });
+    // === Leyenda horizontal de familias (clickeable), debajo del plot ===
+    const legendY = H - margin.bottom + 44;
+    const lg = svg.append('g').attr('transform', `translate(${margin.left}, ${legendY})`);
+    const rowH = 20;
+    const itemH = 14; // swatch
+    let cx = 0;
+    const measure = f => 14 + 8 + f.label.length * (fsLegend * 0.58) + 26;
 
-    // hover
+    if (!compact) {
+      // Una sola fila en desktop/tablet
+      FAMILIES.forEach(f => {
+        const item = lg.append('g')
+          .attr('transform', `translate(${cx}, 0)`)
+          .style('cursor', 'pointer')
+          .classed('lg-active', selectedFamily === f.color);
+        item.append('circle')
+          .attr('cx', 5).attr('cy', 0).attr('r', 5)
+          .attr('fill', f.color)
+          .attr('opacity', selectedFamily === null || selectedFamily === f.color ? 1 : 0.3);
+        item.append('text')
+          .attr('x', 16).attr('y', 3.5)
+          .attr('font-size', fsLegend)
+          .attr('font-weight', selectedFamily === f.color ? 600 : 400)
+          .attr('fill', selectedFamily === f.color ? C.ink : C.ink2)
+          .text(f.label + (selectedFamily === f.color ? ' ✓' : ''));
+        wireLegend(item, f);
+        cx += measure(f);
+      });
+    } else {
+      // Dos filas en compact
+      const half = Math.ceil(FAMILIES.length / 2);
+      FAMILIES.forEach((f, i) => {
+        const row = Math.floor(i / half);
+        const col = i % half;
+        const rowItems = FAMILIES.slice(row * half, row * half + half);
+        const xOff = rowItems.slice(0, col).reduce((s, ff) => s + measure(ff), 0);
+        const item = lg.append('g')
+          .attr('transform', `translate(${xOff}, ${row * rowH})`)
+          .style('cursor', 'pointer')
+          .classed('lg-active', selectedFamily === f.color);
+        item.append('circle')
+          .attr('cx', 5).attr('cy', 0).attr('r', 4.5)
+          .attr('fill', f.color)
+          .attr('opacity', selectedFamily === null || selectedFamily === f.color ? 1 : 0.3);
+        item.append('text')
+          .attr('x', 15).attr('y', 3.5)
+          .attr('font-size', fsLegend)
+          .attr('font-weight', selectedFamily === f.color ? 600 : 400)
+          .attr('fill', selectedFamily === f.color ? C.ink : C.ink2)
+          .text(f.label + (selectedFamily === f.color ? ' ✓' : ''));
+        wireLegend(item, f);
+      });
+    }
+
+    function wireLegend(item, f) {
+      item
+        .on('click', () => {
+          selectedFamily = selectedFamily === f.color ? null : f.color;
+          render();
+        })
+        .on('mouseenter', (evt) => {
+          const types = [...new Set(data.filter(d => d.color === f.color).map(d => d.type))].join(' · ');
+          const n = data.filter(d => d.color === f.color).length;
+          showTip(evt, `<strong>${f.label}</strong><br>${n} predictores<br><span style="color:#a8a8a4">${types}</span><br><span style="color:#7dd8b5">click para ${selectedFamily === f.color ? 'ver todos' : 'aislar familia'}</span>`);
+        })
+        .on('mousemove', evt => {
+          d3.select('#tooltip')
+            .style('left', (evt.clientX + 12) + 'px')
+            .style('top', (evt.clientY - 12) + 'px');
+        })
+        .on('mouseleave', hideTip);
+    }
+
+    // hover en burbujas
     g.selectAll('circle.node')
       .on('mouseenter', function (evt, d) {
-        d3.select(this).attr('r', hoverR).attr('opacity', 1);
+        d3.select(this)
+          .transition().duration(120)
+          .attr('r', isDim(d) ? baseR : hoverR)
+          .attr('opacity', isDim(d) ? 0.35 : 1);
         showTip(evt, `<strong>${d.name}</strong><br>Tipo: ${d.type}<br>${d.note}`);
       })
       .on('mousemove', evt => {
@@ -118,8 +198,11 @@ export function initCausalChart(DATA) {
           .style('left', (evt.clientX + 12) + 'px')
           .style('top', (evt.clientY - 12) + 'px');
       })
-      .on('mouseleave', function () {
-        d3.select(this).attr('r', baseR).attr('opacity', 0.85);
+      .on('mouseleave', function (evt, d) {
+        d3.select(this)
+          .transition().duration(120)
+          .attr('r', baseR + (d.name.length > 18 ? 3 : 0))
+          .attr('opacity', isDim(d) ? 0.12 : 0.85);
         hideTip();
       });
   }

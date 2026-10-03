@@ -100,7 +100,7 @@ export function initDriversChart(DATA) {
         .attr('cx', (d, i) => x(years[i]))
         .attr('cy', d => yAC(d))
         .attr('r', dotR).attr('fill', C.primary).attr('stroke', '#fff').attr('stroke-width', 1.5)
-        .on('mouseenter', (evt, d) => showTip(evt, `<strong>Aire acondicionado</strong><br>${d}% de hogares en ${years[AC_PCT.indexOf(d)]}`))
+        .on('mouseenter', (evt, d, i) => showTip(evt, `<strong>Aire acondicionado</strong><br>${d}% de hogares en ${years[i]}`))
         .on('mousemove', evt => {
           d3.select('#tooltip')
             .style('left', (evt.clientX + 12) + 'px')
@@ -128,15 +128,17 @@ export function initDriversChart(DATA) {
         .on('mouseleave', hideTip);
     }
 
-    // end-of-line labels — solo si hay espacio suficiente (no en compact ni tablet)
+    // end-of-line labels — solo si hay espacio suficiente (no en compact ni tablet).
+    // Los valores se calculan desde los datos (último año de cada serie).
     if (!compact && !tablet) {
-      const labelX = x(years[years.length - 1]) + 14;
+      const lastIdx = years.length - 1;
+      const labelX = x(years[lastIdx]) + 14;
       const minLabelGap = 20;
 
       const visibleSeries = [
-        { key: 'nb',  color: C.accent,  text: 'NB 39.6k',  dot: () => [x(years[years.length - 1]), yNB(39.6 * 1000)] },
-        { key: 'ac',  color: C.primary, text: 'AC 11.5%',  dot: () => [x(years[years.length - 1]), yAC(11.5)] },
-        { key: 'bev', color: C.indigo,  text: 'BEV 6,500', dot: () => [x(years[years.length - 1]), yBEV(6500)] }
+        { key: 'nb',  color: C.accent,  text: `NB ${fmt(Math.round(NET_BILLING[lastIdx] * 1000) / 1000, 1)}k`,  dot: () => [x(years[lastIdx]), yNB(NET_BILLING[lastIdx] * 1000)] },
+        { key: 'ac',  color: C.primary, text: `AC ${AC_PCT[lastIdx]}%`,  dot: () => [x(years[lastIdx]), yAC(AC_PCT[lastIdx])] },
+        { key: 'bev', color: C.indigo,  text: `BEV ${fmt(BEV_SOLD[lastIdx])}`, dot: () => [x(years[lastIdx]), yBEV(BEV_SOLD[lastIdx])] }
       ].filter(s => visible[s.key]);
 
       const sorted = visibleSeries.slice().sort((a, b) => a.dot()[1] - b.dot()[1]);
@@ -210,6 +212,52 @@ export function initDriversChart(DATA) {
     root.append('text').attr('x', 0).attr('y', innerH + (compact ? 44 : 38))
       .attr('font-size', fsAxis).attr('fill', C.ink3)
       .text(parts.join(' · ') || 'Ningún vector seleccionado');
+
+    // === Crosshair + readout en vivo (snap al año más cercano) ===
+    const focusG = root.append('g').style('pointer-events', 'none').style('opacity', 0);
+    const fxLine = focusG.append('line')
+      .attr('y1', 0).attr('y2', innerH)
+      .attr('stroke', C.ink4).attr('stroke-width', 1).attr('stroke-dasharray', '3,3');
+
+    const series = [];
+    if (visible.ac)  series.push({ key: 'ac',  color: C.primary, y: yAC,  val: i => AC_PCT[i],      label: 'AC',  fmtV: v => v + '%' });
+    if (visible.nb)  series.push({ key: 'nb',  color: C.accent,  y: yNB,  val: i => NET_BILLING[i], label: 'NB',  fmtV: v => fmt(Math.round(v * 1000)) });
+    if (visible.bev) series.push({ key: 'bev', color: C.indigo,  y: yBEV, val: i => BEV_SOLD[i],    label: 'BEV', fmtV: v => fmt(v) });
+    series.forEach(s => {
+      s.dot = focusG.append('circle').attr('r', 4.5).attr('fill', s.color).attr('stroke', '#fff').attr('stroke-width', 1.5);
+    });
+
+    const readout = svg.append('g')
+      .attr('transform', `translate(${margin.left + 2}, 16)`)
+      .style('pointer-events', 'none').style('opacity', 0);
+    const rText = readout.append('text')
+      .attr('font-size', compact ? 10 : 11.5).attr('font-weight', 700).attr('fill', C.ink);
+    series.forEach(s => {
+      s.tspan = rText.append('tspan')
+        .attr('dx', 14).attr('font-weight', 500).attr('fill', s.color);
+    });
+
+    root
+      .on('mousemove', (evt) => {
+        const [mx] = d3.pointer(evt, root.node());
+        const clampedX = Math.max(0, Math.min(innerW, mx));
+        let idx = Math.round(x.invert(clampedX) - years[0]);
+        idx = Math.max(0, Math.min(years.length - 1, idx));
+        const px = x(years[idx]);
+        fxLine.attr('x1', px).attr('x2', px);
+        rText.text(`${years[idx]} ·`);
+        series.forEach(s => {
+          const v = s.val(idx);
+          s.dot.attr('cx', px).attr('cy', s.y(v));
+          s.tspan.text(`${s.label} ${s.fmtV(v)}`);
+        });
+        focusG.style('opacity', 1);
+        readout.style('opacity', 1);
+      })
+      .on('mouseleave', () => {
+        focusG.style('opacity', 0);
+        readout.style('opacity', 0);
+      });
   }
 
   // wire up checkboxes

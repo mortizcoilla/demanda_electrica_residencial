@@ -3,6 +3,72 @@
 > Historial de versiones del dashboard. Inspirado en Keep a Changelog 1.1.0.
 > Formato: [Added] / [Changed] / [Fixed] / [Removed] / [Security].
 
+## v0.2.1 (2 de octubre de 2026) — Auditoría de charts · fixes + interactividad
+
+### Fixed
+- **Tooltips invisibles al hacer scroll** — `.tooltip` usaba `position: absolute`
+  pero se posicionaba con coordenadas de viewport (`clientX/Y`); ahora es
+  `position: fixed`. Afectaba a todos los charts por igual.
+- **Línea separadora "observado / proyectado" invisible en el cono CNE** —
+  `proyeccion_cne.js` usaba `C.lineStrong`, que no existía en la paleta
+  (`utils.js`). Se agregó el token `lineStrong` a la paleta `C`.
+- **Anotaciones solapadas en el cono CNE** — "+10,5 TWh electromovilidad" y
+  "+6,8 TWh calefacción" colisionaban cerca de 2043. Ahora viven en un bloque
+  apilado arriba-izquierda del plot, con valores calculados desde
+  `drivers_2043` del JSON.
+- **Ejes mal etiquetados en `causal.js`** — la semántica de la metadata del
+  dataset dice X = estabilidad, Y = horizonte, pero el chart ponía "CORTO
+  PLAZO / LARGO PLAZO" sobre el eje horizontal y "ESTACIONARIO / DINÁMICO"
+  también abajo (doble semántica contradictoria). Corregido: X = estabilidad
+  (estable → cambiante), Y = horizonte (corto → largo, con etiqueta rotada).
+- **Leyenda MAPE desincronizada** — los colores de la leyenda HTML no
+  coincidían con `familia_color` del JSON (y usaba `#0d6b54` para dos
+  significados distintos). Regenerada con los colores reales del chart.
+- **Serie de peaks inconsistente con CEN** — `peak_demanda_sen.json` tenía
+  2022 = 11.500 (ene), 2023 = 11.820 y 2025 = 12.400 (est.), en conflicto con
+  `peak_shift.json` y con el Reporte anual art. 72-15 del CEN. Serie unificada
+  y verificada: 2022 = 11.590 (15-dic), 2023 = 11.549 (26-dic),
+  2025 = 12.397 (04-feb, confirmado). Footer del §2 ahora se calcula desde
+  los datos (+15,9%).
+- **Texto garlado del evento 2023** en `peak_shift.json`
+  ("peak 12 12-dic a las 16h") y nota que llamaba "invernal" a un peak de
+  diciembre — corregido a "estival temprano".
+- **`dashboard-internal.html` no cargaba D3 ni `css/styles.css`** — el head
+  del internal nunca fue sincronizado con el del público: ningún chart
+  renderizaba (ReferenceError de `d3` en `utils.js`) y la página se veía sin
+  estilos. Agregados ambos tags.
+- **Donut §1 ausente en el internal** — el internal aún tenía el viejo
+  `<svg id="chart-sector">` + leyenda estática con colores desactualizados,
+  mientras `sector.js` renderiza en `<div id="sector-host">`. Sincronizado
+  con el público.
+- **Tooltip del chart drivers** — el año del punto AC se resolvía con
+  `AC_PCT.indexOf(d)`, frágil ante valores duplicados; ahora usa el índice
+  del datum.
+
+### Added
+- **Donut §1 interactivo** — click en segmento o leyenda actualiza el readout
+  central (label + % + descripción) y atenúa el resto; click de nuevo resetea.
+- **Crosshair con readout en vivo** en drivers (§3) y peak shift (§2.5):
+  línea guía vertical con snap al año más cercano y valores de todas las
+  series visibles.
+- **Toggles de series en el cono CNE (§8)** — mostrar/ocultar Observado,
+  Medio, Alto, Alto+H2V y banda de incertidumbre, con etiquetas de fin de
+  línea (valor 2043) en desktop.
+- **Leyenda clickeable en predictores (§7)** — se deriva de los colores del
+  dataset (garantiza coincidencia con las burbujas) y permite aislar una
+  familia por click.
+- **Toggle de orden (Mayor/Menor MAPE)** en benchmarks (§5).
+- **Banda de rango 2026** en peak shift (12.500–13.200 MWh/h con tooltip).
+- **Mini-leyenda de estación** en el chart de demanda §2 y colores de
+  estación unificados con §2.5 (invierno verde · verano terracota ·
+  transición ocre).
+
+### Changed
+- Dominios de ejes Y de demanda y peak shift ahora se calculan desde los
+  datos (antes hardcodeados; el peak récord se detecta en vez de asumir
+  `peaks[6]`).
+- Textos §2.5 ajustados: "período estival (diciembre–febrero)" y +15,9%.
+
 ## v0.2.0 (21 de julio de 2026) — Atlas level · datos y visibilidad
 
 ### Changed
